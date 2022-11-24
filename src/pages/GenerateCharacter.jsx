@@ -7,6 +7,7 @@ import {FormControl, FormLabel, Input, NumberInput, NumberInputField, NumberInpu
     } from '@chakra-ui/react'
 import {Button, Form} from 'react-bootstrap';
 import {randomNumber} from '../utilities/utility';
+import {classLibrary} from '../library/CharOptions.library';
 
 
 function GenerateCharacter() {
@@ -15,7 +16,7 @@ function GenerateCharacter() {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [gender, setGender] = useState('');
-    const [level, setLevel] = useState(1);
+    const [level, setLevel] = useState(randomNumber(1, 20));
 
     const handleFirstName = (e) => setFirstName(e.target.value);
     const handleLastName = (e) => setLastName(e.target.value);
@@ -35,37 +36,16 @@ function GenerateCharacter() {
 
         try {
 
-            const RNG = randomNumber(5, 10);
+            const RNG = randomNumber(1, 20);
 
             console.log(RNG);
 
-            axios.defaults.headers['PF2_KEY'] = `${process.env.PF2_API_KEY}`;
+/*          axios.defaults.headers['PF2_KEY'] = `${process.env.PF2_API_KEY}`;
 
             const response = await axios.get(`https://api.pathfinder2.fr/v1/pf2/ancestry`);
 
+            console.log(response); */
 
-
-
-            console.log(response);
-
-
-/*             switch (category) {
-                case ancestry:
-                  setAncestry(response.data.name)
-                  break;
-                case value2:
-                  //Statements executed when the
-                  //result of expression matches value2
-                  break;
-                case valueN:
-                  //Statements executed when the
-                  //result of expression matches valueN
-                  break;
-                default:
-                  //Statements executed when none of
-                  //the values match the value of the expression
-                  break;
-              } */
             
             
         } catch (err) {
@@ -73,6 +53,15 @@ function GenerateCharacter() {
         };
 
     };
+
+    function randomizeAll (){
+        const randomClass = classLibrary[randomNumber(1, classLibrary.length)]
+
+        setCharClass(randomClass);
+
+    };
+
+
 
     const getAll = async () => {
         
@@ -129,7 +118,7 @@ function GenerateCharacter() {
 
                 <br />
 
-                <ChakraButton onClick={getOneFromLibrary} type="button" colorScheme='red' size='lg'>
+                <ChakraButton onClick={randomizeAll} type="button" colorScheme='red' size='lg'>
                 Randomize ALL
                 </ChakraButton>
 
@@ -141,10 +130,10 @@ function GenerateCharacter() {
                         <Text fontWeight='bold'>
                         Segun Adebayo
                             <Badge ml='1' colorScheme='green'>
-                            Fighter
+                            {charClass}
                             </Badge>
                         </Text>
-                        <Text fontSize='sm'>Human Farmer</Text>
+                        <Text fontSize='sm'>{ancestry} {background}</Text>
                     </Box>
                 </Flex>
 
