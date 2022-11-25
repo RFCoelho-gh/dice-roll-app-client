@@ -277,12 +277,16 @@ function GenerateCharacter() {
         console.log(`LETS DALE ARRAY DEFAULT ${defaultArr}`)
 
         for (let i = 0; i < 4; i++) {
-            let pickedAtr = defaultArr[randomNumber(0, defaultArr.length)];
-            console.log(`Jesus, I was picked! My value is ${pickedAtr}`)
-            pickedAtr+=2;
-            console.log(`But now it became ${pickedAtr}!`)
 
-            const index = defaultArr.indexOf(pickedAtr);
+            let rng = randomNumber(0, defaultArr.length-1)
+
+            
+
+            console.log(`Jesus, I was picked! My value is ${defaultArr[rng]}`)
+            defaultArr[rng]+=2
+            console.log(`But now it became ${defaultArr[rng]}!`)
+
+            const index = defaultArr.indexOf(defaultArr[rng]);
             if (index > -1) { // only splice array when item is found
                 defaultArr.splice(index, 1); // 2nd parameter means remove one item only
                 console.log(`I feel smaller: ${defaultArr}`)
@@ -411,7 +415,8 @@ function GenerateCharacter() {
                 <ChakraButton onClick={randomizeAll} type="button" colorScheme='red' size='lg'>
                 Randomize ALL - 🎲{rollCounter}
                 </ChakraButton>
-                <Text align='start' fontSize='sm'>total possible results: {possibleResults}</Text>
+                <Text align='start' fontSize='sm'># Results (All): {possibleResults}</Text>
+                <Text align='start' fontSize='sm'># Results (w/o Deity): {possibleResults/222}</Text>
                 {/* <Text align='start' fontSize='sm'>Ancestries: {possibleResults}</Text>
                 <Text align='start' fontSize='sm'>total possible results: {possibleResults}</Text>
                 <Text align='start' fontSize='sm'>total possible results: {possibleResults}</Text>
