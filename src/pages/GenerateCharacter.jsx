@@ -12,11 +12,16 @@ import {classLibrary} from '../library/CharOptions.library';
 
 function GenerateCharacter() {
 
+    //const possibleResults = (ancestryEntries * backgroundEntries * classEntries * deityEntries );
+    const possibleResults = (30 * 300 * 19 * 222 );
+
     //* USER INPUT BASED
     const [firstName, setFirstName] = useState('Name');
     const [lastName, setLastName] = useState('Surname');
     const [gender, setGender] = useState('');
     const [level, setLevel] = useState(randomNumber(1, 20));
+
+    const [rollCounter, setRollCounter] = useState(0);
 
     const handleFirstName = (e) => setFirstName(e.target.value);
     const handleLastName = (e) => setLastName(e.target.value);
@@ -28,9 +33,18 @@ function GenerateCharacter() {
     const [background, setBackground] = useState('?????');
     const [charClass, setCharClass] = useState('?????');
     const [deity, setDeity] = useState('?????');
-    const [rollCounter, setRollCounter] =useState(0);
+    
 
     //* ATTRIBUTE BASED
+
+    let defaultSTR = 10;
+    let defaultDEX = 10;
+    let defaultCON = 10;
+    let defaultINT = 10;
+    let defaultWIS = 10;
+    let defaultCHA = 10;
+
+    
 
     const [strength, setStrength] = useState(10);
     const [dexterity, setDexterity] = useState(10);
@@ -52,15 +66,10 @@ function GenerateCharacter() {
     
             // -2 here due to Empty Ancestry slot
             const RNG = randomNumber(0, response.data.results.length-2)
-
-            //console.log(response.data.results[RNG].name);
-
             
             //console.log(response.data.results[RNG].data.flaws);
     
             const randomAncestry = response.data.results[RNG].name;
-
-            setAncestry(randomAncestry)
 
             //Setting Attributes
             //BOOSTS
@@ -68,47 +77,48 @@ function GenerateCharacter() {
             const ancestryBoostOne = response.data.results[RNG].data.boosts[0].value[0]
             switch (ancestryBoostOne) {
                 case 'str':
-                    setStrength(strength+2)
+                    defaultSTR+=2;
                     break;
                 case 'dex':
-                    setDexterity(dexterity+2)
+                    defaultDEX+=2;
                     break;
                 case 'con':
-                    setConstitution(constitution+2)
+                    defaultCON+=2;
                     break;
                 case 'int':
-                    setIntelligence(intelligence+2)
+                    defaultINT+=2;
                     break;
                 case 'wis':
-                    setWisdom(wisdom+2)
+                    defaultWIS+=2;
                     break;
                 case 'cha':
-                    setCharisma(charisma+2)
+                    defaultCHA+=2;
                     break;
             };
 
             const ancestryBoostTwo = response.data.results[RNG].data.boosts[1].value[0]
             switch (ancestryBoostTwo) {
                 case 'str':
-                    setStrength(strength+2)
+                    defaultSTR+=2;
                     break;
                 case 'dex':
-                    setDexterity(dexterity+2)
+                    defaultDEX+=2;
                     break;
                 case 'con':
-                    setConstitution(constitution+2)
+                    defaultCON+=2;
                     break;
                 case 'int':
-                    setIntelligence(intelligence+2)
+                    defaultINT+=2;
                     break;
                 case 'wis':
-                    setWisdom(wisdom+2)
+                    defaultWIS+=2;
                     break;
                 case 'cha':
-                    setCharisma(charisma+2)
+                    defaultCHA+=2;
                     break;
             };
 
+            return randomAncestry;
             
         } catch (err) {
             console.log(err);
@@ -130,8 +140,52 @@ function GenerateCharacter() {
             const RNG = randomNumber(0, response.data.results.length-1)
     
             const randomBackground = response.data.results[RNG].name;
-    
-            setBackground(randomBackground);
+
+            const backgroundBoostOne = response.data.results[RNG].data.boosts[0].value[0]
+            switch (backgroundBoostOne) {
+                case 'str':
+                    defaultSTR+=2;
+                    break;
+                case 'dex':
+                    defaultDEX+=2;
+                    break;
+                case 'con':
+                    defaultCON+=2;
+                    break;
+                case 'int':
+                    defaultINT+=2;
+                    break;
+                case 'wis':
+                    defaultWIS+=2;
+                    break;
+                case 'cha':
+                    defaultCHA+=2;
+                    break;
+            };
+
+            const backgroundBoostTwo = response.data.results[RNG].data.boosts[1].value[0]
+            switch (backgroundBoostTwo) {
+                case 'str':
+                    defaultSTR+=2;
+                    break;
+                case 'dex':
+                    defaultDEX+=2;
+                    break;
+                case 'con':
+                    defaultCON+=2;
+                    break;
+                case 'int':
+                    defaultINT+=2;
+                    break;
+                case 'wis':
+                    defaultWIS+=2;
+                    break;
+                case 'cha':
+                    defaultCHA+=2;
+                    break;
+            };
+
+            return randomBackground
             
         } catch (err) {
             console.log(err);
@@ -155,17 +209,39 @@ function GenerateCharacter() {
             const RNG = randomNumber(0, response.data.results.length-2)
     
             const randomClass = response.data.results[RNG].name;
-    
-            setCharClass(randomClass);
+
+            console.log(`Hit is: ${response.data.results[RNG].data.keyAbility.value[0]}`)
+
+            const classBoostOne = response.data.results[RNG].data.keyAbility.value[0]
+            switch (classBoostOne) {
+                case 'str':
+                    defaultSTR+=2;
+                    break;
+                case 'dex':
+                    defaultDEX+=2;
+                    break;
+                case 'con':
+                    defaultCON+=2;
+                    break;
+                case 'int':
+                    defaultINT+=2;
+                    break;
+                case 'wis':
+                    defaultWIS+=2;
+                    break;
+                case 'cha':
+                    defaultCHA+=2;
+                    break;
+            };
+
+            return randomClass
             
         } catch (err) {
 
             console.log(err);
-            
-        }
+        };
 
-
-    }
+    };
 
     //!RANDOM DEITY
 
@@ -181,44 +257,98 @@ function GenerateCharacter() {
             const RNG = randomNumber(0, response.data.results.length-1)
     
             const randomDeity = response.data.results[RNG].name;
-    
-            setDeity(randomDeity);
+
+            return randomDeity;
             
         } catch (err) {
 
             console.log(err);
+        };
+    };
+
+    //!RANDOM 4BOOST
+
+    function randoomBoost (){
+
+        
+
+        const defaultArr = [defaultSTR, defaultDEX, defaultCON, defaultINT, defaultWIS, defaultCHA];
+
+        console.log(`LETS DALE ARRAY DEFAULT ${defaultArr}`)
+
+        for (let i = 0; i < 4; i++) {
+            let pickedAtr = defaultArr[randomNumber(0, defaultArr.length)];
+            console.log(`Jesus, I was picked! My value is ${pickedAtr}`)
+            pickedAtr+=2;
+            console.log(`But now it became ${pickedAtr}!`)
+
+            const index = defaultArr.indexOf(pickedAtr);
+            if (index > -1) { // only splice array when item is found
+                defaultArr.splice(index, 1); // 2nd parameter means remove one item only
+                console.log(`I feel smaller: ${defaultArr}`)
+            };
+
             
-        }
+          }
 
 
+    
     }
 
     //!RANDOMIZE EVERYTHING
 
     async function randomizeAll (){
 
-        //RESET ALL
-        setStrength(10);
-        setDexterity(10);
-        setConstitution(10);
-        setIntelligence(10);
-        setWisdom(10);
-        setCharisma(10);
-        setAncestry('•••••')
-        setBackground('•••••')
-        setCharClass('•••••')
-        setDeity('•••••')
-
+        
         try {
-            
 
-    
+            //Resetting Defaults to 10
+
+            defaultSTR = 10;
+            defaultDEX = 10;
+            defaultCON = 10;
+            defaultINT = 10;
+            defaultWIS = 10;
+            defaultCHA = 10;
+
+            //Activating primitive Spinners
+            setAncestry('•••••')
+            setBackground('•••••')
+            setCharClass('•••••')
+            setDeity('•••••')
+
+            setStrength('••');
+            setDexterity('••');
+            setConstitution('••');
+            setIntelligence('••');
+            setWisdom('••');
+            setCharisma('••');
+
+            //Updating Counter
             setRollCounter(rollCounter+1);
-    
-            await randomizeClass();
-            await randomizeAncestry();
-            await randomizeBackground();
-            await randomizeDeity();
+            
+            //Retrieving new Random result
+            const resultDeity = await randomizeDeity();
+            const resultBackground = await randomizeBackground();
+            const resultClass = await randomizeClass();
+            const resultAncestry = await randomizeAncestry();
+            
+            //Updating State with Results
+            setBackground(resultBackground);
+            setDeity(resultDeity);
+            setCharClass(resultClass);
+            setAncestry(resultAncestry);
+
+            //Calling Random Boosters
+            randoomBoost();
+
+            //Updating Attributes based on Results
+            setStrength(defaultSTR);
+            setDexterity(defaultDEX);
+            setConstitution(defaultCON);
+            setIntelligence(defaultINT);
+            setWisdom(defaultWIS);
+            setCharisma(defaultCHA);
             
         } catch (err) {
             console.log(err);
@@ -281,6 +411,12 @@ function GenerateCharacter() {
                 <ChakraButton onClick={randomizeAll} type="button" colorScheme='red' size='lg'>
                 Randomize ALL - 🎲{rollCounter}
                 </ChakraButton>
+                <Text align='start' fontSize='sm'>total possible results: {possibleResults}</Text>
+                {/* <Text align='start' fontSize='sm'>Ancestries: {possibleResults}</Text>
+                <Text align='start' fontSize='sm'>total possible results: {possibleResults}</Text>
+                <Text align='start' fontSize='sm'>total possible results: {possibleResults}</Text>
+                <Text align='start' fontSize='sm'>total possible results: {possibleResults}</Text> */}
+
 
                <br />
 
