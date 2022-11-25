@@ -13,8 +13,8 @@ import {classLibrary} from '../library/CharOptions.library';
 function GenerateCharacter() {
 
     //* USER INPUT BASED
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
+    const [firstName, setFirstName] = useState('Name');
+    const [lastName, setLastName] = useState('Surname');
     const [gender, setGender] = useState('');
     const [level, setLevel] = useState(randomNumber(1, 20));
 
@@ -26,46 +26,142 @@ function GenerateCharacter() {
     //* RNG RESULT BASED
     const [ancestry, setAncestry] = useState('');
     const [background, setBackground] = useState('');
-    const [charClass, setCharClass] = useState('');
+    const [charClass, setCharClass] = useState('?????');
     const [deity, setDeity] = useState('');
-
-    
-    async function getOneFromLibrary (category){
+    const [rollCounter, setRollCounter] =useState(0);
 
 
+    //!RANDOM ANCESTRY
+    async function randomizeAncestry(){
 
         try {
-
-            const RNG = randomNumber(1, 20);
-
-            console.log(RNG);
-
-/*          axios.defaults.headers['PF2_KEY'] = `${process.env.PF2_API_KEY}`;
-
-            const response = await axios.get(`https://api.pathfinder2.fr/v1/pf2/ancestry`);
-
-            console.log(response); */
-
+            const response = await axios.get(`https://api.pathfinder2.fr/v1/pf2/ancestry`, {
+                headers: {
+                    Authorization: `${process.env.REACT_APP_PF2_API_KEY}`
+                }
+            });
+    
+            // -2 here due to Empty Ancestry slot
+            const RNG = randomNumber(0, response.data.results.length-2)
+    
+            const randomAncestry = response.data.results[RNG].name;
+    
+            console.log(response.data.results)
+    
+            if (randomAncestry === '[Empty Ancestry]'){
+                setAncestry(await randomizeAncestry());
+            }
+    
+            setAncestry(randomAncestry);
             
+        } catch (err) {
+            console.log(err);
+        }
+
+    }
+
+    //!RANDOM BACKGROUND
+
+    async function randomizeBackground(){
+
+        try {
+            const response = await axios.get(`https://api.pathfinder2.fr/v1/pf2/background`, {
+                headers: {
+                    Authorization: `${process.env.REACT_APP_PF2_API_KEY}`
+                }
+            });
+    
+            const RNG = randomNumber(0, response.data.results.length-1)
+    
+            const randomBackground = response.data.results[RNG].name;
+    
+            setBackground(randomBackground);
+            
+        } catch (err) {
+            console.log(err);
+        }
+
+
+    }
+
+    //!RANDOM CLASS
+
+    async function randomizeClass(){
+
+        try {
+            const response = await axios.get(`https://api.pathfinder2.fr/v1/pf2/class`, {
+                headers: {
+                    Authorization: `${process.env.REACT_APP_PF2_API_KEY}`
+                }
+            });
+    
+            // -2 here due to Empty Class slot
+            const RNG = randomNumber(0, response.data.results.length-2)
+    
+            const randomClass = response.data.results[RNG].name;
+    
+            setCharClass(randomClass);
+            
+        } catch (err) {
+
+            console.log(err);
+            
+        }
+
+
+    }
+
+    //!RANDOM DEITY
+
+    async function randomizeDeity(){
+
+        try {
+            const response = await axios.get(`https://api.pathfinder2.fr/v1/pf2/deity`, {
+                headers: {
+                    Authorization: `${process.env.REACT_APP_PF2_API_KEY}`
+                }
+            });
+    
+            const RNG = randomNumber(0, response.data.results.length-1)
+    
+            console.log(response.data.results)
+    
+            const randomDeity = response.data.results[RNG].name;
+    
+            setDeity(randomDeity);
+            
+        } catch (err) {
+
+            console.log(err);
+            
+        }
+
+
+    }
+
+    //!RANDOMIZE EVERYTHING
+
+    async function randomizeAll (){
+
+        try {
+            setAncestry('•••••')
+            setBackground('•••••')
+            setCharClass('•••••')
+            setDeity('•••••')
+    
+            setRollCounter(rollCounter+1);
+    
+            await randomizeClass();
+            await randomizeAncestry();
+            await randomizeBackground();
+            await randomizeDeity();
             
         } catch (err) {
             console.log(err);
         };
 
-    };
-
-    function randomizeAll (){
-        const randomClass = classLibrary[randomNumber(1, classLibrary.length)]
-
-        setCharClass(randomClass);
 
     };
-
-
-
-    const getAll = async () => {
-        
-    }
 
 
     return (
@@ -119,7 +215,7 @@ function GenerateCharacter() {
                 <br />
 
                 <ChakraButton onClick={randomizeAll} type="button" colorScheme='red' size='lg'>
-                Randomize ALL
+                Randomize ALL - 🎲{rollCounter}
                 </ChakraButton>
 
                <br />
@@ -127,13 +223,14 @@ function GenerateCharacter() {
                 <Flex>
                     <Avatar src='a' />
                     <Box ml='3'>
-                        <Text fontWeight='bold'>
-                        Segun Adebayo
+                        <Text align='start' fontWeight='bold'>
+                        {firstName} {lastName}
                             <Badge ml='1' colorScheme='green'>
                             {charClass}
                             </Badge>
                         </Text>
-                        <Text fontSize='sm'>{ancestry} {background}</Text>
+                        <Text align='start' fontSize='sm'>{ancestry}, {background}</Text>
+                        <Text align='start' fontSize='sm'>Follower of {deity}</Text>
                     </Box>
                 </Flex>
 
