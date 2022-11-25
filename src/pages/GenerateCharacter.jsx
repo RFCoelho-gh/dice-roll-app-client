@@ -24,11 +24,20 @@ function GenerateCharacter() {
     const handleLevel = (e) => setLevel(e.target.value);
 
     //* RNG RESULT BASED
-    const [ancestry, setAncestry] = useState('');
-    const [background, setBackground] = useState('');
+    const [ancestry, setAncestry] = useState('?????');
+    const [background, setBackground] = useState('?????');
     const [charClass, setCharClass] = useState('?????');
-    const [deity, setDeity] = useState('');
+    const [deity, setDeity] = useState('?????');
     const [rollCounter, setRollCounter] =useState(0);
+
+    //* ATTRIBUTE BASED
+
+    const [strength, setStrength] = useState(10);
+    const [dexterity, setDexterity] = useState(10);
+    const [constitution, setConstitution] = useState(10);
+    const [intelligence, setIntelligence] = useState(10);
+    const [wisdom, setWisdom] = useState(10);
+    const [charisma, setCharisma] = useState(10);
 
 
     //!RANDOM ANCESTRY
@@ -43,16 +52,63 @@ function GenerateCharacter() {
     
             // -2 here due to Empty Ancestry slot
             const RNG = randomNumber(0, response.data.results.length-2)
+
+            //console.log(response.data.results[RNG].name);
+
+            
+            //console.log(response.data.results[RNG].data.flaws);
     
             const randomAncestry = response.data.results[RNG].name;
-    
-            console.log(response.data.results)
-    
-            if (randomAncestry === '[Empty Ancestry]'){
-                setAncestry(await randomizeAncestry());
-            }
-    
-            setAncestry(randomAncestry);
+
+            setAncestry(randomAncestry)
+
+            //Setting Attributes
+            //BOOSTS
+
+            const ancestryBoostOne = response.data.results[RNG].data.boosts[0].value[0]
+            switch (ancestryBoostOne) {
+                case 'str':
+                    setStrength(strength+2)
+                    break;
+                case 'dex':
+                    setDexterity(dexterity+2)
+                    break;
+                case 'con':
+                    setConstitution(constitution+2)
+                    break;
+                case 'int':
+                    setIntelligence(intelligence+2)
+                    break;
+                case 'wis':
+                    setWisdom(wisdom+2)
+                    break;
+                case 'cha':
+                    setCharisma(charisma+2)
+                    break;
+            };
+
+            const ancestryBoostTwo = response.data.results[RNG].data.boosts[1].value[0]
+            switch (ancestryBoostTwo) {
+                case 'str':
+                    setStrength(strength+2)
+                    break;
+                case 'dex':
+                    setDexterity(dexterity+2)
+                    break;
+                case 'con':
+                    setConstitution(constitution+2)
+                    break;
+                case 'int':
+                    setIntelligence(intelligence+2)
+                    break;
+                case 'wis':
+                    setWisdom(wisdom+2)
+                    break;
+                case 'cha':
+                    setCharisma(charisma+2)
+                    break;
+            };
+
             
         } catch (err) {
             console.log(err);
@@ -124,8 +180,6 @@ function GenerateCharacter() {
     
             const RNG = randomNumber(0, response.data.results.length-1)
     
-            console.log(response.data.results)
-    
             const randomDeity = response.data.results[RNG].name;
     
             setDeity(randomDeity);
@@ -143,11 +197,21 @@ function GenerateCharacter() {
 
     async function randomizeAll (){
 
+        //RESET ALL
+        setStrength(10);
+        setDexterity(10);
+        setConstitution(10);
+        setIntelligence(10);
+        setWisdom(10);
+        setCharisma(10);
+        setAncestry('•••••')
+        setBackground('•••••')
+        setCharClass('•••••')
+        setDeity('•••••')
+
         try {
-            setAncestry('•••••')
-            setBackground('•••••')
-            setCharClass('•••••')
-            setDeity('•••••')
+            
+
     
             setRollCounter(rollCounter+1);
     
@@ -231,6 +295,8 @@ function GenerateCharacter() {
                         </Text>
                         <Text align='start' fontSize='sm'>{ancestry}, {background}</Text>
                         <Text align='start' fontSize='sm'>Follower of {deity}</Text>
+                        <Text align='start' fontSize='sm'>STR: {strength} | DEX: {dexterity} | CON: {constitution}</Text>
+                        <Text align='start' fontSize='sm'>INT: {intelligence} | WIS: {wisdom} | CHA: {charisma}</Text>
                     </Box>
                 </Flex>
 
