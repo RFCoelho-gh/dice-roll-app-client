@@ -290,12 +290,27 @@ function GenerateCharacter() {
     
             const RNG = randomNumber(0, response.data.results.length-1)
     
-            const randomDeity = response.data.results[RNG].name;
+            const deityName = response.data.results[RNG].name;
 
-            //Setting Count for Possibilities
-            setDeityEntries(response.data.count)
+            //*Setting Count for Possibilities
+            //setDeityEntries(response.data.count)
 
-            return randomDeity;
+            const deityCount = response.data.count
+
+            //Taking Description with HTML
+            const deityDescription = response.data.results[RNG].content;
+
+            //*RETURNING OBJECT
+
+            const deityObject = {
+                name: deityName,
+                count: deityCount,
+                description: deityDescription,
+            }
+
+            return deityObject;
+
+            //return randomDeity;
             
         } catch (err) {
 
@@ -366,7 +381,7 @@ function GenerateCharacter() {
             
             //Updating State with Results
             setBackground(resultBackground);
-            setDeity(resultDeity);
+            setDeity(resultDeity.name);
             setCharClass(resultClass);
             setAncestry(resultAncestry);
             
@@ -382,9 +397,13 @@ function GenerateCharacter() {
             setCharisma(defaultCHA);
             
             //Updating Results
-            console.log(allEntries);
+/*             console.log(allEntries);
             console.log(`${ancestryEntries} * ${backgroundEntries} * ${classEntries} * ${deityEntries}`)
-            setAllEntries(ancestryEntries * backgroundEntries * classEntries * deityEntries);
+            setAllEntries(ancestryEntries * backgroundEntries * classEntries * deityEntries); */
+
+            setDeityEntries(resultDeity.count)
+            setAllEntries(resultDeity.count * 1 * 1 * 1)
+
 
             
 
@@ -450,7 +469,7 @@ function GenerateCharacter() {
                 Randomize ALL - 🎲{rollCounter}
                 </ChakraButton>
                 <Text align='start' fontSize='sm'><span className='text-bold'># Results (All):</span> {allEntries}</Text>
-                <Text align='start' fontSize='sm'><span className='text-bold'># Results (w/o Deity):</span> {ancestryEntries * backgroundEntries * classEntries}</Text>
+                <Text align='start' fontSize='sm'><span className='text-bold'># Results (w/o Deity):</span> {allEntries / deityEntries}</Text>
 
 
                <br />
