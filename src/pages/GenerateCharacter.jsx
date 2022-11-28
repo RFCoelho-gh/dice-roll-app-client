@@ -73,7 +73,7 @@ function GenerateCharacter() {
 
             //Setting Count for Possibilities
 
-            const ancestryCount = response.data.count
+            const ancestryCount = response.data.count-1
 
             const ancestryDescription = response.data.results[RNG].content;
 
@@ -176,11 +176,11 @@ function GenerateCharacter() {
                 }
             });
     
-            const RNG = randomNumber(0, response.data.results.length-1)
+            const RNG = randomNumber(0, response.data.results.length-2)
 
             const backgroundName = response.data.results[RNG].name;
 
-            const backgroundCount = response.data.count;
+            const backgroundCount = response.data.count-1;
 
             const backgroundDescription = response.data.results[RNG].content;
 
@@ -286,7 +286,7 @@ function GenerateCharacter() {
             //Setting Count for Possibilities
             setClassEntries(response.data.count)
 
-            const classCount = response.data.count
+            const classCount = response.data.count-1
 
             //Taking Description with HTML
 
@@ -498,9 +498,9 @@ function GenerateCharacter() {
                 Randomize ALL - 🎲{rollCounter}
                 </ChakraButton>
 
-                <Text align='start' fontSize='sm'><span className='text-bold'># Results (All):</span> {allEntries === 'Generate to Calculate' ? allEntries : `${Math.floor(allEntries/1000000).toString()} Million`}</Text>
+                <Text align='start' fontSize='sm'><span className='text-bold'># Results (All):</span> {typeof allEntries === 'string' ? allEntries : `${Math.floor(allEntries/1000000).toString()} Millions`}</Text>
 
-                <Text align='start' fontSize='sm'><span className='text-bold'># Results (w/o Deity):</span> {allEntries / deityEntries}</Text>
+                {typeof allEntries !== 'string' && <Text align='start' fontSize='sm'><span className='text-bold'># Results (w/o Deity):</span> {Math.floor((allEntries/deityEntries)/1000).toString()} Thousands </Text> }
 
 
                <br />
