@@ -13,6 +13,8 @@ import './styles/Global.css'
 
 function GenerateCharacter() {
 
+
+
     //PossibilitiesCalculator
     const [ancestryEntries, setAncestryEntries] = useState('?');
     const [backgroundEntries, setBackgroundEntries] = useState('?');
@@ -443,11 +445,37 @@ function GenerateCharacter() {
 
     };
 
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            await axios.post(`${process.env.REACT_APP_API_URL}/save-character`, {
+                firstName,
+                lastName,
+                gender,
+                level,
+                ancestry,
+                background,
+                charClass,
+                deity,
+                attributes: {
+                    strength: strength,
+                    dexterity: dexterity,
+                    constitution: constitution,
+                    intelligence: intelligence,
+                    wisdom: wisdom,
+                    charisma: charisma,
+                },
+            });
+        } catch (err) {
+            
+        }
+    }
+
 
     return (
         <div>
 
-            <form >
+            <form onSubmit={handleSubmit} >
                 {/* //! FIRST NAME INPUT */}
                 <FormControl isRequired>
                     <FormLabel optionalIndicator>First name</FormLabel>
@@ -520,6 +548,10 @@ function GenerateCharacter() {
                         <Text align='start' fontSize='sm'>INT: {intelligence} | WIS: {wisdom} | CHA: {charisma}</Text>
                     </Box>
                 </Flex>
+
+                <ChakraButton  type="submit" colorScheme='blue' size='sm'>
+                SAVE 💾
+                </ChakraButton>
 
             </form>
 
