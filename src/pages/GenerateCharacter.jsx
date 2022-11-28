@@ -25,7 +25,7 @@ function GenerateCharacter() {
     const [firstName, setFirstName] = useState('Name');
     const [lastName, setLastName] = useState('Surname');
     const [gender, setGender] = useState('');
-    const [level, setLevel] = useState(randomNumber(1, 20));
+    const [level, setLevel] = useState(1);
 
     const [rollCounter, setRollCounter] = useState(0);
 
@@ -70,8 +70,6 @@ function GenerateCharacter() {
     
             // -2 here due to Empty Ancestry slot
             const RNG = randomNumber(0, response.data.results.length-2)
-            
-            //console.log(response.data.results[RNG].data.flaws);
     
             const randomAncestry = response.data.results[RNG].name;
 
@@ -124,6 +122,33 @@ function GenerateCharacter() {
                 case 'cha':
                     defaultCHA+=2;
                     break;
+            };
+
+            //FLAWS
+            const ancestryFlawOne = response.data.results[RNG].data.flaws[0].value[0]
+            if (ancestryFlawOne) {
+                switch (ancestryFlawOne) {
+                    case 'str':
+                        defaultSTR-=2;
+                        break;
+                    case 'dex':
+                        defaultDEX-=2;
+                        break;
+                    case 'con':
+                        defaultCON-=2;
+                        break;
+                    case 'int':
+                        defaultINT-=2;
+                        break;
+                    case 'wis':
+                        defaultWIS-=2;
+                        break;
+                    case 'cha':
+                        defaultCHA-=2;
+                        break;
+                    default:
+    
+                };
             };
 
             return randomAncestry;
