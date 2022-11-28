@@ -14,12 +14,11 @@ import './styles/Global.css'
 function GenerateCharacter() {
 
     //PossibilitiesCalculator
-
     const [ancestryEntries, setAncestryEntries] = useState('?');
     const [backgroundEntries, setBackgroundEntries] = useState('?');
     const [classEntries, setClassEntries] = useState('?');
     const [deityEntries, setDeityEntries] = useState('?');
-
+    const [allEntries, setAllEntries] = useState("Generate to Calculate")
 
     //* USER INPUT BASED
     const [firstName, setFirstName] = useState('Name');
@@ -39,7 +38,6 @@ function GenerateCharacter() {
     const [background, setBackground] = useState('?????');
     const [charClass, setCharClass] = useState('?????');
     const [deity, setDeity] = useState('?????');
-    
 
     //* ATTRIBUTE BASED
 
@@ -227,7 +225,6 @@ function GenerateCharacter() {
             console.log(err);
         }
 
-
     }
 
     //!RANDOM CLASS
@@ -359,6 +356,7 @@ function GenerateCharacter() {
 
             //Updating Counter
             setRollCounter(rollCounter+1);
+
             
             //Retrieving new Random result
             const resultDeity = await randomizeDeity();
@@ -371,10 +369,10 @@ function GenerateCharacter() {
             setDeity(resultDeity);
             setCharClass(resultClass);
             setAncestry(resultAncestry);
-
+            
             //Applying Random Boosters
             randoomBoost();
-
+            
             //Updating Attributes based on Results
             setStrength(defaultSTR);
             setDexterity(defaultDEX);
@@ -383,6 +381,13 @@ function GenerateCharacter() {
             setWisdom(defaultWIS);
             setCharisma(defaultCHA);
             
+            //Updating Results
+            console.log(allEntries);
+            console.log(`${ancestryEntries} * ${backgroundEntries} * ${classEntries} * ${deityEntries}`)
+            setAllEntries(ancestryEntries * backgroundEntries * classEntries * deityEntries);
+
+            
+
         } catch (err) {
             console.log(err);
         };
@@ -444,7 +449,7 @@ function GenerateCharacter() {
                 <ChakraButton onClick={randomizeAll} type="button" colorScheme='red' size='lg'>
                 Randomize ALL - 🎲{rollCounter}
                 </ChakraButton>
-                <Text align='start' fontSize='sm'><span className='text-bold'># Results (All):</span> {ancestryEntries * backgroundEntries * classEntries * deityEntries}</Text>
+                <Text align='start' fontSize='sm'><span className='text-bold'># Results (All):</span> {allEntries}</Text>
                 <Text align='start' fontSize='sm'><span className='text-bold'># Results (w/o Deity):</span> {ancestryEntries * backgroundEntries * classEntries}</Text>
 
 
