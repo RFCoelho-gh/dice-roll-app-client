@@ -3,17 +3,23 @@ import axios  from 'axios';
 import {FormControl, FormLabel, Input, NumberInput, NumberInputField, NumberInputStepper,
      NumberIncrementStepper, NumberDecrementStepper, FormErrorMessage, FormHelperText,
      RadioGroup, HStack, Radio, Button as ChakraButton, ButtonGroup, Flex, Avatar,
-     Box, Text, Badge
+     Box, Text, Badge, extendTheme
     } from '@chakra-ui/react'
 import {Button, Form} from 'react-bootstrap';
 import {randomNumber} from '../utilities/utility';
 import {classLibrary} from '../library/CharOptions.library';
+import './styles/Global.css'
 
 
 function GenerateCharacter() {
 
-    //const possibleResults = (ancestryEntries * backgroundEntries * classEntries * deityEntries );
-    const possibleResults = (30 * 300 * 19 * 222 );
+    //PossibilitiesCalculator
+
+    const [ancestryEntries, setAncestryEntries] = useState('?');
+    const [backgroundEntries, setBackgroundEntries] = useState('?');
+    const [classEntries, setClassEntries] = useState('?');
+    const [deityEntries, setDeityEntries] = useState('?');
+
 
     //* USER INPUT BASED
     const [firstName, setFirstName] = useState('Name');
@@ -44,8 +50,6 @@ function GenerateCharacter() {
     let defaultWIS = 10;
     let defaultCHA = 10;
 
-    
-
     const [strength, setStrength] = useState(10);
     const [dexterity, setDexterity] = useState(10);
     const [constitution, setConstitution] = useState(10);
@@ -70,6 +74,10 @@ function GenerateCharacter() {
             //console.log(response.data.results[RNG].data.flaws);
     
             const randomAncestry = response.data.results[RNG].name;
+
+            //Setting Count for Possibilities
+
+            setAncestryEntries(response.data.count)
 
             //Setting Attributes
             //BOOSTS
@@ -141,6 +149,9 @@ function GenerateCharacter() {
     
             const randomBackground = response.data.results[RNG].name;
 
+            //Setting Count for Possibilities
+            setBackgroundEntries(response.data.count)
+
             const backgroundBoostOne = response.data.results[RNG].data.boosts[0].value[0]
             switch (backgroundBoostOne) {
                 case 'str':
@@ -210,7 +221,8 @@ function GenerateCharacter() {
     
             const randomClass = response.data.results[RNG].name;
 
-            console.log(`Hit is: ${response.data.results[RNG].data.keyAbility.value[0]}`)
+            //Setting Count for Possibilities
+            setClassEntries(response.data.count)
 
             const classBoostOne = response.data.results[RNG].data.keyAbility.value[0]
             switch (classBoostOne) {
@@ -258,6 +270,9 @@ function GenerateCharacter() {
     
             const randomDeity = response.data.results[RNG].name;
 
+            //Setting Count for Possibilities
+            setDeityEntries(response.data.count)
+
             return randomDeity;
             
         } catch (err) {
@@ -270,44 +285,33 @@ function GenerateCharacter() {
 
     function randoomBoost (){
 
-        
+        //This function takes all Default Values,
+        //randomizes four unique entries out of six,
+        //and increases them each by 2
 
         const defaultArr = [defaultSTR, defaultDEX, defaultCON, defaultINT, defaultWIS, defaultCHA];
-
-        console.log(`LETS DALE ARRAY DEFAULT ${defaultArr}`)
 
         for (let i = 0; i < 4; i++) {
 
             let rng = randomNumber(0, defaultArr.length-1)
 
-            
-
-            console.log(`Jesus, I was picked! My value is ${defaultArr[rng]}`)
             defaultArr[rng]+=2
-            console.log(`But now it became ${defaultArr[rng]}!`)
 
             const index = defaultArr.indexOf(defaultArr[rng]);
-            if (index > -1) { // only splice array when item is found
-                defaultArr.splice(index, 1); // 2nd parameter means remove one item only
-                console.log(`I feel smaller: ${defaultArr}`)
+            if (index > -1) { // only splices when rngPick is found
+                defaultArr.splice(index, 1);
             };
-
             
-          }
-
-
-    
-    }
+          };
+    };
 
     //!RANDOMIZE EVERYTHING
 
     async function randomizeAll (){
 
-        
         try {
 
             //Resetting Defaults to 10
-
             defaultSTR = 10;
             defaultDEX = 10;
             defaultCON = 10;
@@ -343,7 +347,7 @@ function GenerateCharacter() {
             setCharClass(resultClass);
             setAncestry(resultAncestry);
 
-            //Calling Random Boosters
+            //Applying Random Boosters
             randoomBoost();
 
             //Updating Attributes based on Results
@@ -415,12 +419,8 @@ function GenerateCharacter() {
                 <ChakraButton onClick={randomizeAll} type="button" colorScheme='red' size='lg'>
                 Randomize ALL - 🎲{rollCounter}
                 </ChakraButton>
-                <Text align='start' fontSize='sm'># Results (All): {possibleResults}</Text>
-                <Text align='start' fontSize='sm'># Results (w/o Deity): {possibleResults/222}</Text>
-                {/* <Text align='start' fontSize='sm'>Ancestries: {possibleResults}</Text>
-                <Text align='start' fontSize='sm'>total possible results: {possibleResults}</Text>
-                <Text align='start' fontSize='sm'>total possible results: {possibleResults}</Text>
-                <Text align='start' fontSize='sm'>total possible results: {possibleResults}</Text> */}
+                <Text align='start' fontSize='sm'><span className='text-bold'># Results (All):</span> {ancestryEntries * backgroundEntries * classEntries * deityEntries}</Text>
+                <Text align='start' fontSize='sm'><span className='text-bold'># Results (w/o Deity):</span> {ancestryEntries * backgroundEntries * classEntries}</Text>
 
 
                <br />
