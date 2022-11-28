@@ -427,14 +427,11 @@ function GenerateCharacter() {
             setCharisma(defaultCHA);
             
             //Updating Results
-/*             console.log(allEntries);
+            console.log(allEntries);
             console.log(`${ancestryEntries} * ${backgroundEntries} * ${classEntries} * ${deityEntries}`)
-            setAllEntries(ancestryEntries * backgroundEntries * classEntries * deityEntries); */
 
             setDeityEntries(resultDeity.count)
             setAllEntries(resultDeity.count * resultClass.count * resultBackground.count * resultAncestry.count)
-
-            console.log(resultAncestry)
 
 
             
@@ -500,7 +497,9 @@ function GenerateCharacter() {
                 <ChakraButton onClick={randomizeAll} type="button" colorScheme='red' size='lg'>
                 Randomize ALL - 🎲{rollCounter}
                 </ChakraButton>
-                <Text align='start' fontSize='sm'><span className='text-bold'># Results (All):</span> {allEntries}</Text>
+
+                <Text align='start' fontSize='sm'><span className='text-bold'># Results (All):</span> {allEntries === 'Generate to Calculate' ? allEntries : `${Math.floor(allEntries/1000000).toString()} Million`}</Text>
+
                 <Text align='start' fontSize='sm'><span className='text-bold'># Results (w/o Deity):</span> {allEntries / deityEntries}</Text>
 
 
