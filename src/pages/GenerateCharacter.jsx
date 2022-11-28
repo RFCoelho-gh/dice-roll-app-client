@@ -69,11 +69,19 @@ function GenerateCharacter() {
             // -2 here due to Empty Ancestry slot
             const RNG = randomNumber(0, response.data.results.length-2)
     
-            const randomAncestry = response.data.results[RNG].name;
+            const ancestryName = response.data.results[RNG].name;
 
             //Setting Count for Possibilities
 
-            setAncestryEntries(response.data.count)
+            const ancestryCount = response.data.count
+
+            const ancestryDescription = response.data.results[RNG].content;
+
+            const ancestryObject = {
+                name: ancestryName,
+                count: ancestryCount,
+                description: ancestryDescription,
+            };
 
             //Setting Attributes
             //BOOSTS
@@ -149,7 +157,7 @@ function GenerateCharacter() {
                 };
             };
 
-            return randomAncestry;
+            return ancestryObject;
             
         } catch (err) {
             console.log(err);
@@ -169,8 +177,12 @@ function GenerateCharacter() {
             });
     
             const RNG = randomNumber(0, response.data.results.length-1)
-    
-            const randomBackground = response.data.results[RNG].name;
+
+            const backgroundName = response.data.results[RNG].name;
+
+            const backgroundCount = response.data.count;
+
+            const backgroundDescription = response.data.results[RNG].content;
 
             //Setting Count for Possibilities
             setBackgroundEntries(response.data.count)
@@ -219,7 +231,13 @@ function GenerateCharacter() {
                     break;
             };
 
-            return randomBackground
+            const backgroundObject = {
+                name: backgroundName,
+                count: backgroundCount,
+                description: backgroundDescription,
+            };
+
+            return backgroundObject;
             
         } catch (err) {
             console.log(err);
@@ -241,10 +259,7 @@ function GenerateCharacter() {
             // -2 here due to Empty Class slot
             const RNG = randomNumber(0, response.data.results.length-2)
     
-            const randomClass = response.data.results[RNG].name;
-
-            //Setting Count for Possibilities
-            setClassEntries(response.data.count)
+            const className = response.data.results[RNG].name;
 
             const classBoostOne = response.data.results[RNG].data.keyAbility.value[0]
             switch (classBoostOne) {
@@ -268,7 +283,24 @@ function GenerateCharacter() {
                     break;
             };
 
-            return randomClass
+            //Setting Count for Possibilities
+            setClassEntries(response.data.count)
+
+            const classCount = response.data.count
+
+            //Taking Description with HTML
+
+            const classDescription = response.data.results[RNG].content;
+
+            //*Returning Object
+
+            const classObject = {
+                name: className,
+                count: classCount,
+                description: classDescription,
+            };
+
+            return classObject;
             
         } catch (err) {
 
@@ -292,9 +324,7 @@ function GenerateCharacter() {
     
             const deityName = response.data.results[RNG].name;
 
-            //*Setting Count for Possibilities
-            //setDeityEntries(response.data.count)
-
+            //*Setting Count for Possibilities Calc
             const deityCount = response.data.count
 
             //Taking Description with HTML
@@ -306,7 +336,7 @@ function GenerateCharacter() {
                 name: deityName,
                 count: deityCount,
                 description: deityDescription,
-            }
+            };
 
             return deityObject;
 
@@ -380,10 +410,10 @@ function GenerateCharacter() {
             const resultAncestry = await randomizeAncestry();
             
             //Updating State with Results
-            setBackground(resultBackground);
+            setBackground(resultBackground.name);
             setDeity(resultDeity.name);
-            setCharClass(resultClass);
-            setAncestry(resultAncestry);
+            setCharClass(resultClass.name);
+            setAncestry(resultAncestry.name);
             
             //Applying Random Boosters
             randoomBoost();
@@ -402,7 +432,9 @@ function GenerateCharacter() {
             setAllEntries(ancestryEntries * backgroundEntries * classEntries * deityEntries); */
 
             setDeityEntries(resultDeity.count)
-            setAllEntries(resultDeity.count * 1 * 1 * 1)
+            setAllEntries(resultDeity.count * resultClass.count * resultBackground.count * resultAncestry.count)
+
+            console.log(resultAncestry)
 
 
             
