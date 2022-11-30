@@ -1,4 +1,5 @@
 import {useState} from 'react';
+import {useNavigate} from 'react-router-dom';
 import axios  from 'axios';
 import {FormControl, FormLabel, Input, NumberInput, NumberInputField, NumberInputStepper,
      NumberIncrementStepper, NumberDecrementStepper, FormErrorMessage, FormHelperText,
@@ -13,7 +14,7 @@ import './styles/Global.css'
 
 function GenerateCharacter() {
 
-
+    const navigate = useNavigate();
 
     //PossibilitiesCalculator
     const [ancestryEntries, setAncestryEntries] = useState('?');
@@ -341,8 +342,6 @@ function GenerateCharacter() {
             };
 
             return deityObject;
-
-            //return randomDeity;
             
         } catch (err) {
 
@@ -403,7 +402,6 @@ function GenerateCharacter() {
 
             //Updating Counter
             setRollCounter(rollCounter+1);
-
             
             //Retrieving new Random result
             const resultDeity = await randomizeDeity();
@@ -428,27 +426,22 @@ function GenerateCharacter() {
             setWisdom(defaultWIS);
             setCharisma(defaultCHA);
             
-            //Updating Results
-            console.log(allEntries);
-            console.log(`${ancestryEntries} * ${backgroundEntries} * ${classEntries} * ${deityEntries}`)
-
+            //Updating Possible Entries
             setDeityEntries(resultDeity.count)
             setAllEntries(resultDeity.count * resultClass.count * resultBackground.count * resultAncestry.count)
-
-
-            
 
         } catch (err) {
             console.log(err);
         };
 
-
     };
+
+    //${process.env.REACT_APP_API_URL}
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.post(`${process.env.REACT_APP_API_URL}/save-character`, {
+            const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api/save-character`, {
                 firstName,
                 lastName,
                 gender,
@@ -466,8 +459,14 @@ function GenerateCharacter() {
                     charisma: charisma,
                 },
             });
-        } catch (err) {
+            console.log(response);
+
+            const newCharId = response.data._id
+
+            navigate(`/characterlist/${newCharId}`)
             
+        } catch (err) {
+            console.log(err);
         }
     }
 
@@ -549,7 +548,7 @@ function GenerateCharacter() {
                     </Box>
                 </Flex>
 
-                <ChakraButton  type="submit" colorScheme='blue' size='sm'>
+                <ChakraButton type="submit" colorScheme='blue' size='sm'>
                 SAVE 💾
                 </ChakraButton>
 

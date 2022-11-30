@@ -12,6 +12,7 @@ import GenerateCharacter from "./pages/GenerateCharacter";
 import Navbar from "./components/Navbar";
 import IsPrivate from "./components/IsPrivate";
 import IsAnon from "./components/IsAnon";
+import CharacterDetails from "./pages/CharacterDetails";
 
 function App() {
   return (
@@ -22,6 +23,8 @@ function App() {
         <Route path="/" element={<HomePage />} />
 
         <Route path="/generate-character" element={<GenerateCharacter/>} />
+
+        <Route path="/characterlist/:id" element={<CharacterDetails/>} />
 
         <Route path="/profile" element={
           <IsPrivate>
