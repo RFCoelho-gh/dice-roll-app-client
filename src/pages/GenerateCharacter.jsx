@@ -58,6 +58,12 @@ function GenerateCharacter() {
     const [wisdom, setWisdom] = useState(10);
     const [charisma, setCharisma] = useState(10);
 
+    const [ancestryDescription, setAncestryDescription] = useState("")
+    const [backgroundDescription, setBackgroundDescription] = useState("")
+    const [classDescription, setClassDescription] = useState("")
+    const [deityDescription, setDeityDescription] = useState("")
+
+
 
     //!RANDOM ANCESTRY
     async function randomizeAncestry(){
@@ -78,7 +84,7 @@ function GenerateCharacter() {
 
             const ancestryCount = response.data.count-1
 
-            const ancestryDescription = response.data.results[RNG].content;
+            const ancestryDescription = response.data.results[RNG].data.description.value;
 
             const ancestryObject = {
                 name: ancestryName,
@@ -185,7 +191,7 @@ function GenerateCharacter() {
 
             const backgroundCount = response.data.count-1;
 
-            const backgroundDescription = response.data.results[RNG].content;
+            const backgroundDescription = response.data.results[RNG].data.description.value;
 
             //Setting Count for Possibilities
             setBackgroundEntries(response.data.count)
@@ -293,7 +299,8 @@ function GenerateCharacter() {
 
             //Taking Description with HTML
 
-            const classDescription = response.data.results[RNG].content;
+            const classDescription = response.data.results[RNG].data.description.value;
+            //console.log(response.data.results[RNG].data.description.value);
 
             //*Returning Object
 
@@ -302,6 +309,8 @@ function GenerateCharacter() {
                 count: classCount,
                 description: classDescription,
             };
+
+            //console.log(classDescription);
 
             return classObject;
             
@@ -331,7 +340,8 @@ function GenerateCharacter() {
             const deityCount = response.data.count
 
             //Taking Description with HTML
-            const deityDescription = response.data.results[RNG].content;
+            const deityDescription = response.data.results[RNG].content
+            //console.log(response.data.results[RNG].content)
 
             //*RETURNING OBJECT
 
@@ -410,10 +420,17 @@ function GenerateCharacter() {
             const resultAncestry = await randomizeAncestry();
             
             //Updating State with Results
-            setBackground(resultBackground.name);
-            setDeity(resultDeity.name);
-            setCharClass(resultClass.name);
             setAncestry(resultAncestry.name);
+            setAncestryDescription(resultAncestry.description);
+
+            setBackground(resultBackground.name);
+            setBackgroundDescription(resultBackground.description);
+
+            setCharClass(resultClass.name);
+            setClassDescription(resultClass.description);
+
+            setDeity(resultDeity.name);
+            setDeityDescription(resultDeity.description);
             
             //Applying Random Boosters
             randoomBoost();
@@ -430,9 +447,16 @@ function GenerateCharacter() {
             setDeityEntries(resultDeity.count)
             setAllEntries(resultDeity.count * resultClass.count * resultBackground.count * resultAncestry.count)
 
+            
+
         } catch (err) {
             console.log(err);
         };
+
+        //console.log(ancestryDescription);
+        //console.log(backgroundDescription);
+        //console.log(deityDescription);
+        //console.log(classDescription);
 
     };
 
@@ -458,7 +482,14 @@ function GenerateCharacter() {
                     wisdom: wisdom,
                     charisma: charisma,
                 },
+                descriptions: {
+                    ancestryDescription: ancestryDescription,
+                    backgroundDescription: backgroundDescription,
+                    classDescription: classDescription,
+                    deityDescription: deityDescription
+                }
             });
+
             console.log(response);
 
             const newCharId = response.data._id
