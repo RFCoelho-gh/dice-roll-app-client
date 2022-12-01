@@ -6,7 +6,7 @@ import {FormControl, FormLabel, Input, NumberInput, NumberInputField, NumberInpu
     RadioGroup, HStack, Radio, Button as ChakraButton, ButtonGroup, Flex, Avatar,
     Box, Text, Badge, extendTheme, IconButton, Stack
 } from '@chakra-ui/react'
-import {DeleteIcon, ViewOffIcon, EditIcon} from '@chakra-ui/icons';
+import {DeleteIcon, CloseIcon, EditIcon} from '@chakra-ui/icons';
 import {Link} from 'react-router-dom';
 
 function CharacterEdit() {
@@ -120,10 +120,10 @@ function CharacterEdit() {
                 <br />
                 <div className='paddingLargeChild'>
 
-                <IconButton type="submit" className='paddingLeft' align='start' colorScheme='gray' aria-label='see character details' size='lg' icon={<EditIcon />} isRound='true' variant='outline'>
+                <IconButton type="submit" className='paddingLeft' align='start' colorScheme='teal' aria-label='see character details' size='lg' icon={<EditIcon />} isRound='true' variant='solid'>
                 </IconButton>
                 <Link to={`/characterlist/global`}>
-                    <IconButton className='paddingLeft' align='start' colorScheme='gray' aria-label='see character details' size='sm' icon={<ViewOffIcon />} isRound='true' variant='outline'>
+                    <IconButton className='paddingLeft' align='start' colorScheme='gray' aria-label='see character details' size='sm' icon={<CloseIcon />} isRound='true' variant='outline'>
                     </IconButton>
                 </Link>
                 </div>

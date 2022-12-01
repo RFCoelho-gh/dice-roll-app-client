@@ -1,7 +1,7 @@
 import {useState, useEffect} from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import {Flex, Avatar, Box, Text, Badge, Center, IconButton} from '@chakra-ui/react';
+import {Flex, Avatar, Box, Text, Badge, Center, IconButton, Heading} from '@chakra-ui/react';
 import {SearchIcon} from '@chakra-ui/icons';
 import {classImgAssigner} from '../utilities/utility';
 
@@ -27,14 +27,15 @@ function Characterlist() {
 
   return (
     <div>
-        <h1>List of Characters</h1>
+
+        <Heading>List of Characters</Heading>
 
 
         {characters.map((character) => {
             return (
-                <Flex>
-
-                    
+                <>
+                <hr />
+                <Flex className='paddingTopBot'>
                     <Avatar src={classImgAssigner(character.charClass)}/>
                     <Box ml='3'>
                         <Flex>
@@ -51,6 +52,8 @@ function Characterlist() {
                         </Text>
                     </Box>
                 </Flex>
+                <hr />
+                </>
                 
               );
             })}
@@ -60,19 +63,3 @@ function Characterlist() {
 }
 
 export default Characterlist
-
-/* return (
-    <div>
-        <h1>List of Characters</h1>
-
-        {characters.map((character) => {
-            return (
-                <div key={character._id}>
-                  <Link to={`/characterlist/${character._id}`}>
-                    <h3>{character.firstName}</h3>
-                  </Link>
-                </div>
-              );
-            })}
-    </div>
-  ) */

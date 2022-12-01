@@ -275,8 +275,6 @@ function GenerateCharacter() {
     
             const className = response.data.results[RNG].name;
 
-            console.log(response.data.results[RNG]);
-
             const classBoostOne = response.data.results[RNG].data.keyAbility.value[0]
             switch (classBoostOne) {
                 case 'str':
@@ -583,7 +581,7 @@ function GenerateCharacter() {
                     <Box ml='3'>
                         <Text align='start' fontWeight='bold'>
                         {firstName} {lastName}
-                            <Badge ml='1' colorScheme='green'>
+                            <Badge ml='1' colorScheme='yellow'>
                             {charClass}
                             </Badge>
                         </Text>

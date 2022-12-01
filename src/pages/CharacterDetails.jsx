@@ -22,6 +22,8 @@ function CharacterDetails() {
 
             setCharacter(response.data);
 
+            console.log(response.data);
+
             setLoading(false);
             
         } catch (err) {
@@ -79,6 +81,26 @@ function CharacterDetails() {
                     Follower of {character.deity}
                     </Badge>
                 </Stack>
+                <Stack direction='row'>
+                    <Badge variant='outline' colorScheme={character.attributes.strength >= 12 ? 'blue' : 'red'}>
+                    STR {character.attributes.strength}
+                    </Badge>
+                    <Badge variant='outline' colorScheme={character.attributes.dexterity >= 12 ? 'blue' : 'red'}>
+                    DEX {character.attributes.dexterity}
+                    </Badge>
+                    <Badge variant='outline' colorScheme={character.attributes.constitution >= 12 ? 'blue' : 'red'}>
+                    CON {character.attributes.constitution}
+                    </Badge>
+                    <Badge variant='outline' colorScheme={character.attributes.intelligence >= 12 ? 'blue' : 'red'}>
+                    INT {character.attributes.intelligence}
+                    </Badge>
+                    <Badge variant='outline' colorScheme={character.attributes.wisdom >= 12 ? 'blue' : 'red'}>
+                    WIS {character.attributes.wisdom}
+                    </Badge>
+                    <Badge variant='outline' colorScheme={character.attributes.charisma >= 12 ? 'blue' : 'red'}>
+                    CHA {character.attributes.charisma}
+                    </Badge>
+                </Stack>
                 <br />
                 <hr />
                 <p className='text-bold'>{character.ancestry}</p>
@@ -101,7 +123,7 @@ function CharacterDetails() {
                 
                 <div>
                     <Link to={`/character/edit/${id}`}>
-                        <IconButton className='paddingLeft' align='start' colorScheme='blue' aria-label='see character details' size='lg' icon={<EditIcon />} isRound='true' variant='solid'>
+                        <IconButton className='paddingLeft' align='start' colorScheme='teal' aria-label='see character details' size='lg' icon={<EditIcon />} isRound='true' variant='solid'>
                         </IconButton>
                     </Link>
                 </div>
