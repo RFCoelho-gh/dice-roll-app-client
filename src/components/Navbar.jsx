@@ -17,6 +17,10 @@ function Navbar() {
         <button>Generate</button>
       </Link>
 
+      <Link to="/characterlist/global">
+        <button>Char List</button>
+      </Link>
+
       {isLoggedIn && (
         <>
           <button onClick={logOutUser}>Logout</button>

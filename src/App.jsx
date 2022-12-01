@@ -13,18 +13,22 @@ import Navbar from "./components/Navbar";
 import IsPrivate from "./components/IsPrivate";
 import IsAnon from "./components/IsAnon";
 import CharacterDetails from "./pages/CharacterDetails";
+import Characterlist from "./pages/Characterlist";
 
 function App() {
   return (
     <div className="App">
       <ChakraProvider>
       <Navbar />
+
       <Routes>
         <Route path="/" element={<HomePage />} />
 
         <Route path="/generate-character" element={<GenerateCharacter/>} />
 
         <Route path="/characterlist/:id" element={<CharacterDetails/>} />
+
+        <Route path="/characterlist/global" element={<Characterlist/>} />
 
         <Route path="/profile" element={
           <IsPrivate>
