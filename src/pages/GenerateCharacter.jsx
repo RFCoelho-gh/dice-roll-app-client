@@ -7,7 +7,7 @@ import {FormControl, FormLabel, Input, NumberInput, NumberInputField, NumberInpu
      Box, Text, Badge, extendTheme
     } from '@chakra-ui/react'
 import {Button, Form} from 'react-bootstrap';
-import {randomNumber} from '../utilities/utility';
+import {classImgAssigner, randomNumber} from '../utilities/utility';
 import {classLibrary} from '../library/CharOptions.library';
 import './styles/Global.css'
 
@@ -15,6 +15,9 @@ import './styles/Global.css'
 function GenerateCharacter() {
 
     const navigate = useNavigate();
+
+    //Flag for Img
+    const [imgSrc, setImgSrc] = useState("kekW")
 
     //PossibilitiesCalculator
     const [ancestryEntries, setAncestryEntries] = useState('?');
@@ -393,6 +396,9 @@ function GenerateCharacter() {
 
         try {
 
+            //Reset Flag for Img
+            setImgSrc("kekW");
+
             //Resetting Defaults to 10
             defaultSTR = 10;
             defaultDEX = 10;
@@ -418,12 +424,14 @@ function GenerateCharacter() {
             setRollCounter(rollCounter+1);
             
             //Retrieving new Random result
+            const resultClass = await randomizeClass();
             const resultDeity = await randomizeDeity();
             const resultBackground = await randomizeBackground();
-            const resultClass = await randomizeClass();
             const resultAncestry = await randomizeAncestry();
             
             //Updating State with Results
+            setImgSrc(classImgAssigner(resultClass.name));
+
             setAncestry(resultAncestry.name);
             setAncestryDescription(resultAncestry.description);
 
@@ -432,7 +440,7 @@ function GenerateCharacter() {
 
             setCharClass(resultClass.name);
             setClassDescription(resultClass.description);
-
+            
             setDeity(resultDeity.name);
             setDeityDescription(resultDeity.description);
             
@@ -450,7 +458,6 @@ function GenerateCharacter() {
             //Updating Possible Entries
             setDeityEntries(resultDeity.count)
             setAllEntries(resultDeity.count * resultClass.count * resultBackground.count * resultAncestry.count)
-
             
 
         } catch (err) {
@@ -504,6 +511,8 @@ function GenerateCharacter() {
             console.log(err);
         }
     }
+
+    
 
 
     return (
@@ -567,8 +576,10 @@ function GenerateCharacter() {
 
                <br />
 
+               {/* //condition ? true : false. */}
+
                 <Flex>
-                    <Avatar src='a' />
+                    <Avatar src={imgSrc} />
                     <Box ml='3'>
                         <Text align='start' fontWeight='bold'>
                         {firstName} {lastName}
