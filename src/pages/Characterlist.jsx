@@ -1,7 +1,8 @@
 import {useState, useEffect} from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import {Flex, Avatar, Box, Text, Badge} from '@chakra-ui/react';
+import {Flex, Avatar, Box, Text, Badge, Center} from '@chakra-ui/react';
+import {classImgAssigner} from '../utilities/utility';
 
 function Characterlist() {
 
@@ -33,7 +34,9 @@ function Characterlist() {
         {characters.map((character) => {
             return (
                 <Flex>
-                    <Avatar src='a'/>
+
+                    
+                    <Avatar src={classImgAssigner(character.charClass)}/>
                     <Box ml='3'>
                         <Text align='start' fontWeight='bold'>
                             {character.firstName} <Badge ml="1" colorScheme="yellow">{character.charClass}</Badge>

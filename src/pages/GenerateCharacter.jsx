@@ -264,11 +264,15 @@ function GenerateCharacter() {
                     Authorization: `${process.env.REACT_APP_PF2_API_KEY}`
                 }
             });
+
+            
     
             // -2 here due to Empty Class slot
             const RNG = randomNumber(0, response.data.results.length-2)
     
             const className = response.data.results[RNG].name;
+
+            console.log(response.data.results[RNG]);
 
             const classBoostOne = response.data.results[RNG].data.keyAbility.value[0]
             switch (classBoostOne) {
