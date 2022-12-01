@@ -9,18 +9,21 @@ import LoginPage from "./pages/LoginPage";
 
 import GenerateCharacter from "./pages/GenerateCharacter";
 
-import Navbar from "./components/Navbar";
+/* import Navbar from "./components/Navbar"; */
 import IsPrivate from "./components/IsPrivate";
 import IsAnon from "./components/IsAnon";
 import CharacterDetails from "./pages/CharacterDetails";
 import Characterlist from "./pages/Characterlist";
 import CharacterEdit from "./pages/CharacterEdit";
+/* import WithSubnavigation from "./components/ChakraNav"; */
+import WithSubnavigation from "./components/OtherChakraNav";
 
 function App() {
   return (
     <div className="App">
       <ChakraProvider>
-      <Navbar />
+{/*       <WithSubnavigation/> */}
+      <WithSubnavigation/>
 
       <Routes>
         <Route path="/" element={<HomePage />} />
