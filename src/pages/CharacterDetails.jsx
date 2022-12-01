@@ -3,7 +3,7 @@ import {useParams} from 'react-router-dom';
 import axios from 'axios'
 import { Stack, Skeleton, Heading, Flex, Avatar,
      Box, Text, Badge, IconButton } from '@chakra-ui/react';
-import {ViewOffIcon} from '@chakra-ui/icons';
+import {ViewOffIcon, EditIcon} from '@chakra-ui/icons';
 import './styles/Global.css'
 import { classImgAssigner } from '../utilities/utility';
 import {Link} from 'react-router-dom';
@@ -99,6 +99,12 @@ function CharacterDetails() {
                     .replaceAll("<p>","").replaceAll("<em>","").replaceAll("<h1>","").replaceAll("</h1>","").replaceAll("<strong>","").replaceAll("</strong>","").replaceAll("</p>","").replaceAll("<hr />","")}.</p>
                 <hr />
                 
+                <div>
+                    <Link to={`/character/edit/${id}`}>
+                        <IconButton className='paddingLeft' align='start' colorScheme='blue' aria-label='see character details' size='lg' icon={<EditIcon />} isRound='true' variant='solid'>
+                        </IconButton>
+                    </Link>
+                </div>
             </div>
 
         )}        

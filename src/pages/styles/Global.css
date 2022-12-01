@@ -15,4 +15,8 @@
     padding-right: 5px;
 }
 
+.paddingLargeChild > * {
+    padding: 15px;
+}
+
 

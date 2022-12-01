@@ -14,6 +14,7 @@ import IsPrivate from "./components/IsPrivate";
 import IsAnon from "./components/IsAnon";
 import CharacterDetails from "./pages/CharacterDetails";
 import Characterlist from "./pages/Characterlist";
+import CharacterEdit from "./pages/CharacterEdit";
 
 function App() {
   return (
@@ -29,6 +30,8 @@ function App() {
         <Route path="/characterlist/:id" element={<CharacterDetails/>} />
 
         <Route path="/characterlist/global" element={<Characterlist/>} />
+
+        <Route path="/character/edit/:id" element={<CharacterEdit/>} /> 
 
         <Route path="/profile" element={
           <IsPrivate>
