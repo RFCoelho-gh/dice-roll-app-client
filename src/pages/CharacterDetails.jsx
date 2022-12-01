@@ -1,8 +1,12 @@
 import {useState, useEffect} from 'react'
 import {useParams} from 'react-router-dom';
 import axios from 'axios'
-import { Stack, Skeleton, Heading } from '@chakra-ui/react'
+import { Stack, Skeleton, Heading, Flex, Avatar,
+     Box, Text, Badge, IconButton } from '@chakra-ui/react';
+import {ViewOffIcon} from '@chakra-ui/icons';
 import './styles/Global.css'
+import { classImgAssigner } from '../utilities/utility';
+import {Link} from 'react-router-dom';
 
 function CharacterDetails() {
 
@@ -19,8 +23,6 @@ function CharacterDetails() {
             setCharacter(response.data);
 
             setLoading(false);
-
-            console.log(response.data);
             
         } catch (err) {
             console.log(err);
@@ -48,8 +50,36 @@ function CharacterDetails() {
 
         {!loading && (
             
-            <div>
-                <Heading>{character.firstName} {character.lastName}</Heading>
+            <div className='paddingToChild'>
+                <Flex>
+                    <Avatar src={classImgAssigner(character.charClass)} />
+                    <Heading className='paddingSides'>{character.firstName} {character.lastName}</Heading>
+                    <Link to={`/characterlist/global`}>
+                        <IconButton className='paddingLeft' align='start' colorScheme='gray' aria-label='see character details' size='sm' icon={<ViewOffIcon />} isRound='true' variant='outline'>
+                        </IconButton>
+                    </Link>
+                </Flex>
+                <br />
+                <Stack direction='row'>
+                    <Badge variant='solid' colorScheme='teal'>
+                    {character.ancestry}
+                    </Badge>
+                    <Badge variant='solid' colorScheme='teal'>
+                    {character.background}
+                    </Badge>
+                    <Badge variant='solid' colorScheme='teal'>
+                    {character.charClass}
+                    </Badge>
+                </Stack>
+                <Stack direction='row'>
+                    <Badge variant='outline' colorScheme='teal'>
+                    Level {character.level}
+                    </Badge>
+                    <Badge variant='outline' colorScheme='teal'>
+                    Follower of {character.deity}
+                    </Badge>
+                </Stack>
+                <br />
                 <hr />
                 <p className='text-bold'>{character.ancestry}</p>
                 <p>{character.descriptions.ancestryDescription.split(".")[0]

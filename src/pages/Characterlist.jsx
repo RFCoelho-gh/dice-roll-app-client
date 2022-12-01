@@ -14,8 +14,6 @@ function Characterlist() {
 
             const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/characterlist/global`);
 
-            console.log(response);
-
             setCharacters(response.data);
             
         } catch (err) {

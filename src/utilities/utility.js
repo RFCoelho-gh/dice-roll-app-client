@@ -7,7 +7,6 @@ function randomNumber (min, max) {
 function classImgAssigner (className) {
     const tinyName = className.toLowerCase()
     let src = "a"
-    console.log(tinyName)
     switch (tinyName) {
         case 'alchemist':
         case 'barbarian':
@@ -37,10 +36,7 @@ function classImgAssigner (className) {
             src = 'kekW'
             break;
     }
-    console.log(src)
-
     return src;
-
 }
 
 export {randomNumber, classImgAssigner}
