@@ -1,7 +1,7 @@
 import {useState, useEffect} from 'react'
 import {useParams} from 'react-router-dom';
 import axios from 'axios'
-import { Stack, Skeleton } from '@chakra-ui/react'
+import { Stack, Skeleton, Heading } from '@chakra-ui/react'
 import './styles/Global.css'
 
 function CharacterDetails() {
@@ -35,8 +35,6 @@ function CharacterDetails() {
   return (
     <div>
 
-        <h1>Character Details</h1>
-
         {loading && (
             <Stack>
                 <Skeleton height='20px' />
@@ -51,7 +49,7 @@ function CharacterDetails() {
         {!loading && (
             
             <div>
-                <h2>{character.firstName} {character.lastName}</h2>
+                <Heading>{character.firstName} {character.lastName}</Heading>
                 <hr />
                 <p className='text-bold'>{character.ancestry}</p>
                 <p>{character.descriptions.ancestryDescription.split(".")[0]
