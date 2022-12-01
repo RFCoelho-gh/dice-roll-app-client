@@ -76,12 +76,12 @@ import {
           >
             <Button
               as={"a"}
-              fontSize={"sm"}
+              fontSize={"md"}
               fontWeight={400}
               variant={"link"}
-              href={"#"}
+              href={"/login"}
             >
-              Sign In
+              👤
             </Button>
             <Button
               display={{ base: "none", md: "inline-flex" }}

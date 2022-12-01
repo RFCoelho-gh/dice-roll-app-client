@@ -2,6 +2,9 @@ import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import authService from "../services/auth.service";
+import {FormControl, FormLabel, Input, NumberInput, NumberInputField, NumberInputStepper,
+  NumberIncrementStepper, NumberDecrementStepper, FormErrorMessage, FormHelperText,
+  RadioGroup, HStack, Radio, Button as ChakraButton, ButtonGroup} from '@chakra-ui/react'
 
 function LoginPage() {
   const [email, setEmail] = useState("");
