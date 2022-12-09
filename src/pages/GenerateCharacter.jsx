@@ -2,11 +2,10 @@ import {useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import axios  from 'axios';
 import {FormControl, FormLabel, Input, NumberInput, NumberInputField, NumberInputStepper,
-     NumberIncrementStepper, NumberDecrementStepper, FormErrorMessage, FormHelperText,
-     RadioGroup, HStack, Radio, Button as ChakraButton, ButtonGroup, Flex, Avatar,
-     Box, Text, Badge, extendTheme
+     NumberIncrementStepper, NumberDecrementStepper, FormHelperText,
+     RadioGroup, HStack, Radio, Button as ChakraButton, Flex, Avatar,
+     Box, Text, Badge
     } from '@chakra-ui/react'
-import {Button, Form} from 'react-bootstrap';
 import {classImgAssigner, randomNumber} from '../utilities/utility';
 import {classLibrary} from '../library/CharOptions.library';
 import './styles/Global.css'
@@ -267,8 +266,6 @@ function GenerateCharacter() {
                     Authorization: `${process.env.REACT_APP_PF2_API_KEY}`
                 }
             });
-
-            
     
             // -2 here due to Empty Class slot
             const RNG = randomNumber(0, response.data.results.length-2)
@@ -461,14 +458,7 @@ function GenerateCharacter() {
             console.log(err);
         };
 
-        //console.log(ancestryDescription);
-        //console.log(backgroundDescription);
-        //console.log(deityDescription);
-        //console.log(classDescription);
-
     };
-
-    //${process.env.REACT_APP_API_URL}
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -508,9 +498,6 @@ function GenerateCharacter() {
             console.log(err);
         }
     }
-
-    
-
 
     return (
         <div>
@@ -572,8 +559,6 @@ function GenerateCharacter() {
 
 
                <br />
-
-               {/* //condition ? true : false. */}
 
                 <Flex>
                     <Avatar src={imgSrc} />

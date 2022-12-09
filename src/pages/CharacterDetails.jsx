@@ -1,8 +1,7 @@
 import {useState, useEffect} from 'react'
 import {useParams} from 'react-router-dom';
 import axios from 'axios'
-import { Stack, Skeleton, Heading, Flex, Avatar,
-     Box, Text, Badge, IconButton } from '@chakra-ui/react';
+import { Stack, Skeleton, Heading, Flex, Avatar, Badge, IconButton } from '@chakra-ui/react';
 import {ViewOffIcon, EditIcon} from '@chakra-ui/icons';
 import './styles/Global.css'
 import { classImgAssigner } from '../utilities/utility';

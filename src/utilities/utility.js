@@ -18,6 +18,7 @@ function classImgAssigner (className) {
         case 'gunslinger':
         case 'inventor':
         case 'investigator':
+        case 'kineticist':
         case 'magus':
         case 'monk':
         case 'oracle':
