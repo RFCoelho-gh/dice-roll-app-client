@@ -87,7 +87,7 @@ function GenerateCharacter() {
 
             const ancestryCount = response.data.count-1
 
-            const ancestryDescription = response.data.results[RNG].data.description.value;
+            const ancestryDescription = response.data.results[RNG].system.description.value;
 
             const ancestryObject = {
                 name: ancestryName,
@@ -98,7 +98,7 @@ function GenerateCharacter() {
             //Setting Attributes
             //BOOSTS
 
-            const ancestryBoostOne = response.data.results[RNG].data.boosts[0].value[0]
+            const ancestryBoostOne = response.data.results[RNG].system.boosts[0].value[0]
             switch (ancestryBoostOne) {
                 case 'str':
                     defaultSTR+=2;
@@ -120,7 +120,7 @@ function GenerateCharacter() {
                     break;
             };
 
-            const ancestryBoostTwo = response.data.results[RNG].data.boosts[1].value[0]
+            const ancestryBoostTwo = response.data.results[RNG].system.boosts[1].value[0]
             switch (ancestryBoostTwo) {
                 case 'str':
                     defaultSTR+=2;
@@ -143,7 +143,7 @@ function GenerateCharacter() {
             };
 
             //FLAWS
-            const ancestryFlawOne = response.data.results[RNG].data.flaws[0].value[0]
+            const ancestryFlawOne = response.data.results[RNG].system.flaws[0].value[0]
             if (ancestryFlawOne) {
                 switch (ancestryFlawOne) {
                     case 'str':
@@ -194,12 +194,12 @@ function GenerateCharacter() {
 
             const backgroundCount = response.data.count-1;
 
-            const backgroundDescription = response.data.results[RNG].data.description.value;
+            const backgroundDescription = response.data.results[RNG].system.description.value;
 
             //Setting Count for Possibilities
             setBackgroundEntries(response.data.count)
 
-            const backgroundBoostOne = response.data.results[RNG].data.boosts[0].value[0]
+            const backgroundBoostOne = response.data.results[RNG].system.boosts[0].value[0]
             switch (backgroundBoostOne) {
                 case 'str':
                     defaultSTR+=2;
@@ -221,7 +221,7 @@ function GenerateCharacter() {
                     break;
             };
 
-            const backgroundBoostTwo = response.data.results[RNG].data.boosts[1].value[0]
+            const backgroundBoostTwo = response.data.results[RNG].system.boosts[1].value[0]
             switch (backgroundBoostTwo) {
                 case 'str':
                     defaultSTR+=2;
@@ -275,7 +275,7 @@ function GenerateCharacter() {
     
             const className = response.data.results[RNG].name;
 
-            const classBoostOne = response.data.results[RNG].data.keyAbility.value[0]
+            const classBoostOne = response.data.results[RNG].system.keyAbility.value[0]
             switch (classBoostOne) {
                 case 'str':
                     defaultSTR+=2;
@@ -304,8 +304,7 @@ function GenerateCharacter() {
 
             //Taking Description with HTML
 
-            const classDescription = response.data.results[RNG].data.description.value;
-            //console.log(response.data.results[RNG].data.description.value);
+            const classDescription = response.data.results[RNG].system.description.value;
 
             //*Returning Object
 
