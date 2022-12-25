@@ -109,23 +109,23 @@ function CharacterDetails() {
                 <br />
                 <hr />
                 <p className='text-bold'>{character.ancestry}</p>
-                <p>{character.descriptions.ancestryDescription.split(".")[0]
-                    .replaceAll("<p>","").replaceAll("<em>","").replaceAll("<h1>","").replaceAll("</h1>","").replaceAll("<strong>","").replaceAll("</strong>","").replaceAll("</p>","").replaceAll("<hr />","")}.</p>
+                <div
+                dangerouslySetInnerHTML={{__html: character.descriptions.ancestryDescription.slice(0,200).replaceAll("<em>","")+" (...)"}}
+                />
                 <hr />
                 <p className='text-bold'>{character.background}</p>
-                <p>{character.descriptions.backgroundDescription.split(".")[0]
-                    .replaceAll("<p>","").replaceAll("<em>","").replaceAll("<h1>","").replaceAll("</h1>","").replaceAll("<strong>","").replaceAll("</strong>","").replaceAll("</p>","").replaceAll("<hr />","")}.</p>
+                <div
+                dangerouslySetInnerHTML={{__html: character.descriptions.backgroundDescription.slice(0,200).replaceAll("<em>","")+" (...)"}}
+                />
                 <hr />
                 <p className='text-bold'>{character.charClass}</p>
-
                 <div
-                dangerouslySetInnerHTML={{__html: character.descriptions.classDescription.slice(0,150)+" (...)"}}
+                dangerouslySetInnerHTML={{__html: character.descriptions.classDescription.slice(0,200).replaceAll("<em>","")+" (...)"}}
                 />
-
                 <hr />
                 <p className='text-bold'>Follower of {character.deity}</p>
                 <div
-                dangerouslySetInnerHTML={{__html: character.descriptions.deityDescription.slice(0,150)+" (...)"}}
+                dangerouslySetInnerHTML={{__html: character.descriptions.deityDescription.slice(0,200).replaceAll("<em>","")+" (...)"}}
                 />
                 <hr />
                 

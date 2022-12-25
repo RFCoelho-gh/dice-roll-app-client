@@ -65,8 +65,6 @@ function GenerateCharacter() {
     const [classDescription, setClassDescription] = useState("")
     const [deityDescription, setDeityDescription] = useState("")
 
-
-
     //!RANDOM ANCESTRY
     async function randomizeAncestry(){
 
@@ -267,8 +265,6 @@ function GenerateCharacter() {
                 }
             });
 
-            
-    
             // -2 here due to Empty Class slot
             const RNG = randomNumber(0, response.data.results.length-2)
     
@@ -453,7 +449,6 @@ function GenerateCharacter() {
             //Updating Possible Entries
             setDeityEntries(resultDeity.count)
             setAllEntries(resultDeity.count * resultClass.count * resultBackground.count * resultAncestry.count)
-            
 
         } catch (err) {
             console.log(err);
@@ -585,7 +580,6 @@ function GenerateCharacter() {
 
         </div>
     )
-
 }
 
 export default GenerateCharacter;
