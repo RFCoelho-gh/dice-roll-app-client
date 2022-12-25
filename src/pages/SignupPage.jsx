@@ -7,8 +7,6 @@ import {classicFour, randomNumber} from '../utilities/utility';
 
 function SignupPage() {
 
-  const randomClassic = classicFour();
-
   const [rngClassic, setRngClassic] = useState(classicFour())
 
   const [email, setEmail] = useState("");
@@ -58,7 +56,7 @@ function SignupPage() {
 
       <form onSubmit={handleSignupSubmit}>
 
-        <FormControl className="paddingDown">
+        <FormControl className="paddingLeft paddingDown">
           <FormLabel className="paddingLeft">Username:</FormLabel>
           <Input type="text" name="name" value={name} onChange={handleName} width={351} placeholder={rngClassic}></Input>
         </FormControl>

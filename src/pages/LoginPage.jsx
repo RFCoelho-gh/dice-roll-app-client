@@ -55,7 +55,7 @@ function LoginPage() {
       <Heading className="paddingTop">User Login</Heading>
 
       <form onSubmit={handleLoginSubmit}>
-        <FormControl className="paddingDown">
+        <FormControl className="paddingLeft paddingDown">
           <FormLabel className="paddingLeft">Email:</FormLabel>
           <Input type='email' name="email" value={email} onChange={handleEmail} width={351} placeholder={`${classicFour().toLowerCase()}@adventurer.com`} />
         </FormControl>
