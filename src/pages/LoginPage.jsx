@@ -2,6 +2,7 @@ import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import authService from "../services/auth.service";
+import {classicFour, randomNumber} from '../utilities/utility';
 import {Input, NumberInput, NumberInputField, NumberInputStepper,
   NumberIncrementStepper, NumberDecrementStepper, RadioGroup, 
   HStack, Radio, ButtonGroup, Button, Heading, FormControl, 
@@ -56,7 +57,7 @@ function LoginPage() {
       <form onSubmit={handleLoginSubmit}>
         <FormControl className="paddingDown">
           <FormLabel className="paddingLeft">Email:</FormLabel>
-          <Input type='email' name="email" value={email} onChange={handleEmail} width={351} placeholder="warrior@adventurer.com" />
+          <Input type='email' name="email" value={email} onChange={handleEmail} width={351} placeholder={`${classicFour().toLowerCase()}@adventurer.com`} />
         </FormControl>
         <FormControl className="paddingLeft paddingDown">
           <FormLabel>Password:</FormLabel>

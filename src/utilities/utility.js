@@ -38,4 +38,9 @@ function classImgAssigner (className) {
     return src;
 }
 
-export {randomNumber, classImgAssigner}
+function classicFour () {
+    const classicArr = ["Fighter", "Wizard", "Rogue", "Cleric"];
+    return classicArr[randomNumber(0, 3)];
+};
+
+export {randomNumber, classImgAssigner, classicFour}
