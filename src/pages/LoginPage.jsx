@@ -2,7 +2,7 @@ import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import authService from "../services/auth.service";
-import {classicFour, randomNumber} from '../utilities/utility';
+import {classicFour} from '../utilities/utility';
 import {Input, NumberInput, NumberInputField, NumberInputStepper,
   NumberIncrementStepper, NumberDecrementStepper, RadioGroup, 
   HStack, Radio, ButtonGroup, Button, Heading, FormControl, 
@@ -52,7 +52,7 @@ function LoginPage() {
   return (
     <div className="LoginPage">
       
-      <Heading>User Login</Heading>
+      <Heading className="paddingTop">User Login</Heading>
 
       <form onSubmit={handleLoginSubmit}>
         <FormControl className="paddingDown">
@@ -60,11 +60,11 @@ function LoginPage() {
           <Input type='email' name="email" value={email} onChange={handleEmail} width={351} placeholder={`${classicFour().toLowerCase()}@adventurer.com`} />
         </FormControl>
         <FormControl className="paddingLeft paddingDown">
-          <FormLabel>Password:</FormLabel>
+          <FormLabel className="paddingLeft">Password:</FormLabel>
           <Input type='password' name="password" value={password} onChange={handlePassword} width={351} placeholder="**********"/>
         </FormControl>
         <div className="paddingTopBot15">
-          <Button className="" colorScheme='green' size='lg' type="submit">
+          <Button colorScheme='green' size='lg' type="submit">
             Login!
           </Button>
         </div>

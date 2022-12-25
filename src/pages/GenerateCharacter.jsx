@@ -7,7 +7,6 @@ import {FormControl, FormLabel, Input, NumberInput, NumberInputField, NumberInpu
      Box, Text, Badge
     } from '@chakra-ui/react'
 import {classImgAssigner, randomNumber} from '../utilities/utility';
-import {classLibrary} from '../library/CharOptions.library';
 import './styles/Global.css'
 
 
