@@ -35,7 +35,6 @@ function GenerateCharacter() {
 
     const handleFirstName = (e) => setFirstName(e.target.value);
     const handleLastName = (e) => setLastName(e.target.value);
-    const handleGender = (e) => setGender(e.target.value);
     const handleLevel = (e) => setLevel(e.target.value);
 
     //* RNG RESULT BASED
@@ -511,21 +510,6 @@ function GenerateCharacter() {
                 <FormControl>
                     <FormLabel>First name</FormLabel>
                     <Input type="text" value={lastName} onChange={handleLastName} placeholder="Optional entry.." />
-                    <FormHelperText>Optional entry.</FormHelperText>
-                </FormControl>
-
-                <br />
-
-                {/* //! GENDER INPUT */}
-                <FormControl as='fieldset'>
-                    <FormLabel as='legend'>Gender</FormLabel>
-                    <RadioGroup defaultValue={'other'} onChange={handleGender}>
-                        <HStack spacing='24px'>
-                            <Radio value='male'>Male</Radio>
-                            <Radio value='female'>Female</Radio>
-                            <Radio value='other'>Other</Radio>
-                        </HStack>
-                    </RadioGroup>
                     <FormHelperText>Optional entry.</FormHelperText>
                 </FormControl>
 

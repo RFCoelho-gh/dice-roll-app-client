@@ -19,16 +19,9 @@ function CharacterDetails() {
 
             const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/character/${id}`)
 
-            console.log(response);
-
             setCharacter(response.data);
 
-            console.log(response.data);
-
             setLoading(false);
-
-            console.log(character.descriptions);
-
             
         } catch (err) {
             console.log(err);
@@ -110,25 +103,25 @@ function CharacterDetails() {
                 <hr />
                 <p className='text-bold'>{character.ancestry}</p>
                 <div
-                dangerouslySetInnerHTML={{__html: character.descriptions.ancestryDescription.slice(0,200).replaceAll("<em>","")+" (...)"}}
+                dangerouslySetInnerHTML={{__html: character.descriptions.ancestryDescription.slice(0,200).replaceAll("<em>","").replaceAll("<hr />","")+" (...)"}}
                 />
                 <hr />
                 <p className='text-bold'>{character.background}</p>
                 <div
-                dangerouslySetInnerHTML={{__html: character.descriptions.backgroundDescription.slice(0,200).replaceAll("<em>","")+" (...)"}}
+                dangerouslySetInnerHTML={{__html: character.descriptions.backgroundDescription.slice(0,200).replaceAll("<em>","").replaceAll("<hr />","")+" (...)"}}
                 />
                 <hr />
                 <p className='text-bold'>{character.charClass}</p>
                 <div
-                dangerouslySetInnerHTML={{__html: character.descriptions.classDescription.slice(0,200).replaceAll("<em>","")+" (...)"}}
+                dangerouslySetInnerHTML={{__html: character.descriptions.classDescription.slice(0,200).replaceAll("<em>","").replaceAll("<hr />","")+" (...)"}}
                 />
                 <hr />
                 <p className='text-bold'>Follower of {character.deity}</p>
                 <div
-                dangerouslySetInnerHTML={{__html: character.descriptions.deityDescription.slice(0,200).replaceAll("<em>","")+" (...)"}}
+                dangerouslySetInnerHTML={{__html: character.descriptions.deityDescription.slice(0,200).replaceAll("<em>","").replaceAll("<hr />","")+" (...)"}}
                 />
                 <hr />
-                
+
                 <div>
                     <Link to={`/character/edit/${id}`}>
                         <IconButton className='paddingLeft' align='start' colorScheme='teal' aria-label='see character details' size='lg' icon={<EditIcon />} isRound='true' variant='solid'>
