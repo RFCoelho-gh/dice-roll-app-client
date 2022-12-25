@@ -497,10 +497,11 @@ function GenerateCharacter() {
     return (
         <div>
 
+                <br />
             <form onSubmit={handleSubmit} >
                 {/* //! FIRST NAME INPUT */}
                 <FormControl isRequired>
-                    <FormLabel optionalIndicator>First name</FormLabel>
+                    <FormLabel optionalIndicator>First Name</FormLabel>
                     <Input type='text' value={firstName} onChange={handleFirstName} placeholder="Type your character's name here." />
                 </FormControl>
 
@@ -508,7 +509,7 @@ function GenerateCharacter() {
 
                 {/* //! LAST NAME INPUT */}
                 <FormControl>
-                    <FormLabel>First name</FormLabel>
+                    <FormLabel>Last Name <Text fontSize='xs'><sup>Optional</sup></Text></FormLabel>
                     <Input type="text" value={lastName} onChange={handleLastName} placeholder="Optional entry.." />
                     <FormHelperText>Optional entry.</FormHelperText>
                 </FormControl>
