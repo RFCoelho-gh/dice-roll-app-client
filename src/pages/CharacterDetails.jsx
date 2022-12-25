@@ -19,17 +19,23 @@ function CharacterDetails() {
 
             const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/character/${id}`)
 
+            console.log(response);
+
             setCharacter(response.data);
 
             console.log(response.data);
 
             setLoading(false);
+
+            console.log(character.descriptions);
+
             
         } catch (err) {
             console.log(err);
         }
     };
 
+    
     useEffect(() =>{
         getChar();
     }, []);
@@ -111,13 +117,16 @@ function CharacterDetails() {
                     .replaceAll("<p>","").replaceAll("<em>","").replaceAll("<h1>","").replaceAll("</h1>","").replaceAll("<strong>","").replaceAll("</strong>","").replaceAll("</p>","").replaceAll("<hr />","")}.</p>
                 <hr />
                 <p className='text-bold'>{character.charClass}</p>
-                <p>{character.descriptions.classDescription.split(".")[0]
-                    .replaceAll("<p>","").replaceAll("<em>","").replaceAll("<h1>","").replaceAll("</h1>","").replaceAll("<strong>","").replaceAll("</strong>","").replaceAll("</p>","").replaceAll("<hr />","")}.</p>
+
+                <div
+                dangerouslySetInnerHTML={{__html: character.descriptions.classDescription.slice(0,150)+" (...)"}}
+                />
+
                 <hr />
-                <p className='text-bold'>Follower of {character.descriptions.deityDescription.split('[')[0]
-                    .replaceAll("<p>","").replaceAll("<em>","").replaceAll("<h1>","").replaceAll("</h1>","").replaceAll("<strong>","").replaceAll("</strong>","").replaceAll("</p>","").replaceAll("<hr />","")}</p>
-                <p>{character.descriptions.deityDescription.split(">")[3].split(".")[0].replaceAll("<p>","")
-                    .replaceAll("<p>","").replaceAll("<em>","").replaceAll("<h1>","").replaceAll("</h1>","").replaceAll("<strong>","").replaceAll("</strong>","").replaceAll("</p>","").replaceAll("<hr />","")}.</p>
+                <p className='text-bold'>Follower of {character.deity}</p>
+                <div
+                dangerouslySetInnerHTML={{__html: character.descriptions.deityDescription.slice(0,150)+" (...)"}}
+                />
                 <hr />
                 
                 <div>

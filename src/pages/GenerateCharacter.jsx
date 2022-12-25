@@ -266,6 +266,8 @@ function GenerateCharacter() {
                     Authorization: `${process.env.REACT_APP_PF2_API_KEY}`
                 }
             });
+
+            
     
             // -2 here due to Empty Class slot
             const RNG = randomNumber(0, response.data.results.length-2)
@@ -341,8 +343,7 @@ function GenerateCharacter() {
             const deityCount = response.data.count
 
             //Taking Description with HTML
-            const deityDescription = response.data.results[RNG].content
-            //console.log(response.data.results[RNG].content)
+            const deityDescription = response.data.results[RNG].system.description.value
 
             //*RETURNING OBJECT
 
