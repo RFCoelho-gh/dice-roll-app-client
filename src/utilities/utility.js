@@ -1,5 +1,3 @@
-
-
 function randomNumber (min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min)
 }
@@ -18,6 +16,7 @@ function classImgAssigner (className) {
         case 'gunslinger':
         case 'inventor':
         case 'investigator':
+        case 'kineticist':
         case 'magus':
         case 'monk':
         case 'oracle':
@@ -39,4 +38,9 @@ function classImgAssigner (className) {
     return src;
 }
 
-export {randomNumber, classImgAssigner}
+function classicFour () {
+    const classicArr = ["Fighter", "Wizard", "Rogue", "Cleric"];
+    return classicArr[randomNumber(0, 3)];
+};
+
+export {randomNumber, classImgAssigner, classicFour}

@@ -1,8 +1,7 @@
 import {useState, useEffect} from 'react'
 import {useParams} from 'react-router-dom';
 import axios from 'axios'
-import { Stack, Skeleton, Heading, Flex, Avatar,
-     Box, Text, Badge, IconButton } from '@chakra-ui/react';
+import { Stack, Skeleton, Heading, Flex, Avatar, Badge, IconButton } from '@chakra-ui/react';
 import {ViewOffIcon, EditIcon} from '@chakra-ui/icons';
 import './styles/Global.css'
 import { classImgAssigner } from '../utilities/utility';
@@ -22,8 +21,6 @@ function CharacterDetails() {
 
             setCharacter(response.data);
 
-            console.log(response.data);
-
             setLoading(false);
             
         } catch (err) {
@@ -31,6 +28,7 @@ function CharacterDetails() {
         }
     };
 
+    
     useEffect(() =>{
         getChar();
     }, []);
@@ -104,23 +102,26 @@ function CharacterDetails() {
                 <br />
                 <hr />
                 <p className='text-bold'>{character.ancestry}</p>
-                <p>{character.descriptions.ancestryDescription.split(".")[0]
-                    .replaceAll("<p>","").replaceAll("<em>","").replaceAll("<h1>","").replaceAll("</h1>","").replaceAll("<strong>","").replaceAll("</strong>","").replaceAll("</p>","").replaceAll("<hr />","")}.</p>
+                <div
+                dangerouslySetInnerHTML={{__html: character.descriptions.ancestryDescription.slice(0,200).replaceAll("<em>","").replaceAll("<hr />","")+" (...)"}}
+                />
                 <hr />
                 <p className='text-bold'>{character.background}</p>
-                <p>{character.descriptions.backgroundDescription.split(".")[0]
-                    .replaceAll("<p>","").replaceAll("<em>","").replaceAll("<h1>","").replaceAll("</h1>","").replaceAll("<strong>","").replaceAll("</strong>","").replaceAll("</p>","").replaceAll("<hr />","")}.</p>
+                <div
+                dangerouslySetInnerHTML={{__html: character.descriptions.backgroundDescription.slice(0,200).replaceAll("<em>","").replaceAll("<hr />","")+" (...)"}}
+                />
                 <hr />
                 <p className='text-bold'>{character.charClass}</p>
-                <p>{character.descriptions.classDescription.split(".")[0]
-                    .replaceAll("<p>","").replaceAll("<em>","").replaceAll("<h1>","").replaceAll("</h1>","").replaceAll("<strong>","").replaceAll("</strong>","").replaceAll("</p>","").replaceAll("<hr />","")}.</p>
+                <div
+                dangerouslySetInnerHTML={{__html: character.descriptions.classDescription.slice(0,200).replaceAll("<em>","").replaceAll("<hr />","")+" (...)"}}
+                />
                 <hr />
-                <p className='text-bold'>Follower of {character.descriptions.deityDescription.split('[')[0]
-                    .replaceAll("<p>","").replaceAll("<em>","").replaceAll("<h1>","").replaceAll("</h1>","").replaceAll("<strong>","").replaceAll("</strong>","").replaceAll("</p>","").replaceAll("<hr />","")}</p>
-                <p>{character.descriptions.deityDescription.split(">")[3].split(".")[0].replaceAll("<p>","")
-                    .replaceAll("<p>","").replaceAll("<em>","").replaceAll("<h1>","").replaceAll("</h1>","").replaceAll("<strong>","").replaceAll("</strong>","").replaceAll("</p>","").replaceAll("<hr />","")}.</p>
+                <p className='text-bold'>Follower of {character.deity}</p>
+                <div
+                dangerouslySetInnerHTML={{__html: character.descriptions.deityDescription.slice(0,200).replaceAll("<em>","").replaceAll("<hr />","")+" (...)"}}
+                />
                 <hr />
-                
+
                 <div>
                     <Link to={`/character/edit/${id}`}>
                         <IconButton className='paddingLeft' align='start' colorScheme='teal' aria-label='see character details' size='lg' icon={<EditIcon />} isRound='true' variant='solid'>

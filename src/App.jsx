@@ -15,15 +15,13 @@ import IsAnon from "./components/IsAnon";
 import CharacterDetails from "./pages/CharacterDetails";
 import Characterlist from "./pages/Characterlist";
 import CharacterEdit from "./pages/CharacterEdit";
-/* import WithSubnavigation from "./components/ChakraNav"; */
-import WithSubnavigation from "./components/OtherChakraNav";
+import PrimeNavbar from "./components/PrimeNavbar";
 
 function App() {
   return (
     <div className="App">
       <ChakraProvider>
-{/*       <WithSubnavigation/> */}
-      <WithSubnavigation/>
+      <PrimeNavbar/>
 
       <Routes>
         <Route path="/" element={<HomePage />} />

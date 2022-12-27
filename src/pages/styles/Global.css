@@ -10,6 +10,14 @@
     padding-left: 5px;
 }
 
+.paddingDown {
+    padding-bottom: 5px;
+}
+
+.paddingTop {
+    padding-top: 5px;
+}
+
 .paddingSides {
     padding-left: 5px;
     padding-right: 5px;
@@ -24,3 +32,11 @@
     padding-bottom: 5px;
 }
 
+.paddingTopBot15 {
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.text-normal {
+    font-style: normal;
+}

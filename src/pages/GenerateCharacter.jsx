@@ -2,13 +2,11 @@ import {useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import axios  from 'axios';
 import {FormControl, FormLabel, Input, NumberInput, NumberInputField, NumberInputStepper,
-     NumberIncrementStepper, NumberDecrementStepper, FormErrorMessage, FormHelperText,
-     RadioGroup, HStack, Radio, Button as ChakraButton, ButtonGroup, Flex, Avatar,
-     Box, Text, Badge, extendTheme
+     NumberIncrementStepper, NumberDecrementStepper, FormHelperText,
+     RadioGroup, HStack, Radio, Button as ChakraButton, Flex, Avatar,
+     Box, Text, Badge
     } from '@chakra-ui/react'
-import {Button, Form} from 'react-bootstrap';
 import {classImgAssigner, randomNumber} from '../utilities/utility';
-import {classLibrary} from '../library/CharOptions.library';
 import './styles/Global.css'
 
 
@@ -36,7 +34,6 @@ function GenerateCharacter() {
 
     const handleFirstName = (e) => setFirstName(e.target.value);
     const handleLastName = (e) => setLastName(e.target.value);
-    const handleGender = (e) => setGender(e.target.value);
     const handleLevel = (e) => setLevel(e.target.value);
 
     //* RNG RESULT BASED
@@ -66,8 +63,6 @@ function GenerateCharacter() {
     const [classDescription, setClassDescription] = useState("")
     const [deityDescription, setDeityDescription] = useState("")
 
-
-
     //!RANDOM ANCESTRY
     async function randomizeAncestry(){
 
@@ -87,7 +82,7 @@ function GenerateCharacter() {
 
             const ancestryCount = response.data.count-1
 
-            const ancestryDescription = response.data.results[RNG].data.description.value;
+            const ancestryDescription = response.data.results[RNG].system.description.value;
 
             const ancestryObject = {
                 name: ancestryName,
@@ -98,7 +93,7 @@ function GenerateCharacter() {
             //Setting Attributes
             //BOOSTS
 
-            const ancestryBoostOne = response.data.results[RNG].data.boosts[0].value[0]
+            const ancestryBoostOne = response.data.results[RNG].system.boosts[0].value[0]
             switch (ancestryBoostOne) {
                 case 'str':
                     defaultSTR+=2;
@@ -120,7 +115,7 @@ function GenerateCharacter() {
                     break;
             };
 
-            const ancestryBoostTwo = response.data.results[RNG].data.boosts[1].value[0]
+            const ancestryBoostTwo = response.data.results[RNG].system.boosts[1].value[0]
             switch (ancestryBoostTwo) {
                 case 'str':
                     defaultSTR+=2;
@@ -143,7 +138,7 @@ function GenerateCharacter() {
             };
 
             //FLAWS
-            const ancestryFlawOne = response.data.results[RNG].data.flaws[0].value[0]
+            const ancestryFlawOne = response.data.results[RNG].system.flaws[0].value[0]
             if (ancestryFlawOne) {
                 switch (ancestryFlawOne) {
                     case 'str':
@@ -194,12 +189,12 @@ function GenerateCharacter() {
 
             const backgroundCount = response.data.count-1;
 
-            const backgroundDescription = response.data.results[RNG].data.description.value;
+            const backgroundDescription = response.data.results[RNG].system.description.value;
 
             //Setting Count for Possibilities
             setBackgroundEntries(response.data.count)
 
-            const backgroundBoostOne = response.data.results[RNG].data.boosts[0].value[0]
+            const backgroundBoostOne = response.data.results[RNG].system.boosts[0].value[0]
             switch (backgroundBoostOne) {
                 case 'str':
                     defaultSTR+=2;
@@ -221,7 +216,7 @@ function GenerateCharacter() {
                     break;
             };
 
-            const backgroundBoostTwo = response.data.results[RNG].data.boosts[1].value[0]
+            const backgroundBoostTwo = response.data.results[RNG].system.boosts[1].value[0]
             switch (backgroundBoostTwo) {
                 case 'str':
                     defaultSTR+=2;
@@ -268,14 +263,12 @@ function GenerateCharacter() {
                 }
             });
 
-            
-    
             // -2 here due to Empty Class slot
             const RNG = randomNumber(0, response.data.results.length-2)
     
             const className = response.data.results[RNG].name;
 
-            const classBoostOne = response.data.results[RNG].data.keyAbility.value[0]
+            const classBoostOne = response.data.results[RNG].system.keyAbility.value[0]
             switch (classBoostOne) {
                 case 'str':
                     defaultSTR+=2;
@@ -304,8 +297,7 @@ function GenerateCharacter() {
 
             //Taking Description with HTML
 
-            const classDescription = response.data.results[RNG].data.description.value;
-            //console.log(response.data.results[RNG].data.description.value);
+            const classDescription = response.data.results[RNG].system.description.value;
 
             //*Returning Object
 
@@ -345,8 +337,7 @@ function GenerateCharacter() {
             const deityCount = response.data.count
 
             //Taking Description with HTML
-            const deityDescription = response.data.results[RNG].content
-            //console.log(response.data.results[RNG].content)
+            const deityDescription = response.data.results[RNG].system.description.value
 
             //*RETURNING OBJECT
 
@@ -456,20 +447,12 @@ function GenerateCharacter() {
             //Updating Possible Entries
             setDeityEntries(resultDeity.count)
             setAllEntries(resultDeity.count * resultClass.count * resultBackground.count * resultAncestry.count)
-            
 
         } catch (err) {
             console.log(err);
         };
 
-        //console.log(ancestryDescription);
-        //console.log(backgroundDescription);
-        //console.log(deityDescription);
-        //console.log(classDescription);
-
     };
-
-    //${process.env.REACT_APP_API_URL}
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -510,16 +493,14 @@ function GenerateCharacter() {
         }
     }
 
-    
-
-
     return (
         <div>
 
+                <br />
             <form onSubmit={handleSubmit} >
                 {/* //! FIRST NAME INPUT */}
                 <FormControl isRequired>
-                    <FormLabel optionalIndicator>First name</FormLabel>
+                    <FormLabel optionalIndicator>First Name</FormLabel>
                     <Input type='text' value={firstName} onChange={handleFirstName} placeholder="Type your character's name here." />
                 </FormControl>
 
@@ -527,23 +508,8 @@ function GenerateCharacter() {
 
                 {/* //! LAST NAME INPUT */}
                 <FormControl>
-                    <FormLabel>First name</FormLabel>
+                    <FormLabel>Last Name <Text fontSize='xs'><sup>Optional</sup></Text></FormLabel>
                     <Input type="text" value={lastName} onChange={handleLastName} placeholder="Optional entry.." />
-                    <FormHelperText>Optional entry.</FormHelperText>
-                </FormControl>
-
-                <br />
-
-                {/* //! GENDER INPUT */}
-                <FormControl as='fieldset'>
-                    <FormLabel as='legend'>Gender</FormLabel>
-                    <RadioGroup defaultValue={'other'} onChange={handleGender}>
-                        <HStack spacing='24px'>
-                            <Radio value='male'>Male</Radio>
-                            <Radio value='female'>Female</Radio>
-                            <Radio value='other'>Other</Radio>
-                        </HStack>
-                    </RadioGroup>
                     <FormHelperText>Optional entry.</FormHelperText>
                 </FormControl>
 
@@ -574,8 +540,6 @@ function GenerateCharacter() {
 
                <br />
 
-               {/* //condition ? true : false. */}
-
                 <Flex>
                     <Avatar src={imgSrc} />
                     <Box ml='3'>
@@ -600,7 +564,6 @@ function GenerateCharacter() {
 
         </div>
     )
-
 }
 
 export default GenerateCharacter;

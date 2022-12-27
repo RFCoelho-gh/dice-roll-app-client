@@ -1,8 +1,14 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import authService from "../services/auth.service";
+import {Heading, FormControl, FormLabel, Input, Button} from '@chakra-ui/react';
+import {classicFour, randomNumber} from '../utilities/utility';
+//import { FormControl } from "react-bootstrap";
 
 function SignupPage() {
+
+  const [rngClassic, setRngClassic] = useState(classicFour())
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
@@ -46,30 +52,39 @@ function SignupPage() {
 
   return (
     <div className="SignupPage">
-      <h1>Sign Up</h1>
+      <Heading className="paddingTop">User Signup</Heading>
 
       <form onSubmit={handleSignupSubmit}>
-        <label>Email:</label>
-        <input type="email" name="email" value={email} onChange={handleEmail} />
 
-        <label>Password:</label>
-        <input
-          type="password"
-          name="password"
-          value={password}
-          onChange={handlePassword}
-        />
+        <FormControl className="paddingLeft paddingDown">
+          <FormLabel className="paddingLeft">Username:</FormLabel>
+          <Input type="text" name="name" value={name} onChange={handleName} width={351} placeholder={rngClassic}></Input>
+        </FormControl>
 
-        <label>Name:</label>
-        <input type="text" name="name" value={name} onChange={handleName} />
+        <FormControl className="paddingLeft paddingDown">
+          <FormLabel className="paddingLeft">Email:</FormLabel>
+          <Input type="email" name="email" value={email} onChange={handleEmail} width={351} placeholder={`${rngClassic.toLowerCase()}@adventurer.com`}></Input>
+        </FormControl>
 
-        <button type="submit">Sign Up</button>
+        <FormControl className="paddingLeft paddingDown">
+          <FormLabel className="paddingLeft">Password:</FormLabel>
+          <Input type='password' name="password" value={password} onChange={handlePassword} width={351} placeholder="**********"></Input>
+        </FormControl>
+
+        <div className="paddingTopBot15">
+          <Button type="submit" colorScheme='green' size='lg'>
+            Sign Up!
+          </Button>
+        </div>
+
+        {errorMessage && <p className="error-message">{errorMessage}</p>}
+
+        <hr />
+        <p className="text-bold paddingTopBot">Already have account?</p>
+        <Button colorScheme='blue' size='sm'><Link to={"/login"}> Log in</Link></Button>
+
       </form>
 
-      {errorMessage && <p className="error-message">{errorMessage}</p>}
-
-      <p>Already have account?</p>
-      <Link to={"/login"}> Login</Link>
     </div>
   );
 }

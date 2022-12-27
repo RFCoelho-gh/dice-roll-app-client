@@ -2,9 +2,12 @@ import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import authService from "../services/auth.service";
-import {FormControl, FormLabel, Input, NumberInput, NumberInputField, NumberInputStepper,
-  NumberIncrementStepper, NumberDecrementStepper, FormErrorMessage, FormHelperText,
-  RadioGroup, HStack, Radio, Button as ChakraButton, ButtonGroup} from '@chakra-ui/react'
+import {classicFour} from '../utilities/utility';
+import {Input, NumberInput, NumberInputField, NumberInputStepper,
+  NumberIncrementStepper, NumberDecrementStepper, RadioGroup, 
+  HStack, Radio, ButtonGroup, Button, Heading, FormControl, 
+  FormLabel, FormErrorMessage, FormHelperText} from '@chakra-ui/react';
+/*  */
 
 function LoginPage() {
   const [email, setEmail] = useState("");
@@ -48,26 +51,28 @@ function LoginPage() {
 
   return (
     <div className="LoginPage">
-      <h1>Login</h1>
+      
+      <Heading className="paddingTop">User Login</Heading>
 
       <form onSubmit={handleLoginSubmit}>
-        <label>Email:</label>
-        <input type="email" name="email" value={email} onChange={handleEmail} />
-
-        <label>Password:</label>
-        <input
-          type="password"
-          name="password"
-          value={password}
-          onChange={handlePassword}
-        />
-
-        <button type="submit">Login</button>
+        <FormControl className="paddingLeft paddingDown">
+          <FormLabel className="paddingLeft">Email:</FormLabel>
+          <Input type='email' name="email" value={email} onChange={handleEmail} width={351} placeholder={`${classicFour().toLowerCase()}@adventurer.com`} />
+        </FormControl>
+        <FormControl className="paddingLeft paddingDown">
+          <FormLabel className="paddingLeft">Password:</FormLabel>
+          <Input type='password' name="password" value={password} onChange={handlePassword} width={351} placeholder="**********"/>
+        </FormControl>
+        <div className="paddingTopBot15">
+          <Button colorScheme='green' size='lg' type="submit">
+            Login!
+          </Button>
+        </div>
       </form>
       {errorMessage && <p className="error-message">{errorMessage}</p>}
-
-      <p>Don't have an account yet?</p>
-      <Link to={"/signup"}> Sign Up</Link>
+      <hr />
+      <p className="text-bold paddingTopBot">Don't have an account yet?</p>
+      <Button colorScheme='blue' size='sm'><Link to={"/signup"}> Sign Up</Link></Button>
     </div>
   );
 }
