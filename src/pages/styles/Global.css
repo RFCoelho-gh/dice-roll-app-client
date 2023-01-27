@@ -40,3 +40,7 @@
 .text-normal {
     font-style: normal;
 }
+
+.homeIconContainer {
+    padding-left: 13px;
+}

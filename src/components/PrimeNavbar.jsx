@@ -8,6 +8,7 @@ import {
     Collapse,
     Icon,
     Link,
+    Image,
     Popover,
     PopoverTrigger,
     PopoverContent,
@@ -56,11 +57,12 @@ import {
           </Flex>
           <Flex flex={{ base: 1 }} justify={{ base: "center", md: "start" }}>
             <Text
+              className="homeIconContainer"
               textAlign={useBreakpointValue({ base: "center", md: "left" })}
               fontFamily={"heading"}
               color={useColorModeValue("gray.800", "white")}
             >
-              <Link href="/"><img src="../assets/ROLLDICE_logo_small.png" alt="rolldice" /></Link>
+              <Link href="/"><Image boxSize='40px' src='https://www.seekpng.com/png/full/237-2373281_general-home-repairs-home-purple-icon-png.png' alt='rolldice_logo2' /></Link>
             </Text>
   
             <Flex display={{ base: "none", md: "flex" }} ml={10}>
