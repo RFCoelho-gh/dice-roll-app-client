@@ -91,7 +91,8 @@ import {
               fontWeight={600}
               color={"white"}
               bg={"pink.400"}
-              href={"#"}
+              as={"a"}
+              href={"/signup"}
               _hover={{
                 bg: "pink.300"
               }}
