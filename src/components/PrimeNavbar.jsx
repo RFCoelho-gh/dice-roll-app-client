@@ -276,7 +276,7 @@ import {
       children: [
         {
           label: "Character List",
-          subLabel: "Trending Design to inspire you",
+          subLabel: "List of all saved Characters!",
           href: "/characterlist/global"
         }
       ]
