@@ -533,9 +533,9 @@ function GenerateCharacter() {
                 Randomize ALL - 🎲{rollCounter}
                 </ChakraButton>
 
-                <Text align='start' fontSize='sm'><span className='text-bold'># Results (All):</span> {typeof allEntries === 'string' ? allEntries : `${Math.floor(allEntries/1000000).toString()} Millions`}</Text>
+                <Text align='start' fontSize='sm'><span className='text-bold'> # Combinations (All):</span> {typeof allEntries === 'string' ? allEntries : `${Math.floor(allEntries/1000000).toString()} Millions`}</Text>
 
-                {typeof allEntries !== 'string' && <Text align='start' fontSize='sm'><span className='text-bold'># Results (w/o Deity):</span> {Math.floor((allEntries/deityEntries)/1000).toString()} Thousands </Text> }
+                {typeof allEntries !== 'string' && <Text align='start' fontSize='sm'><span className='text-bold'> # Combinations (w/o Deity):</span> {Math.floor((allEntries/deityEntries)/1000).toString()} Thousands </Text> }
 
 
                <br />
