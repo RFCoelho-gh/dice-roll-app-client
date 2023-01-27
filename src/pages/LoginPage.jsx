@@ -3,11 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import authService from "../services/auth.service";
 import {classicFour} from '../utilities/utility';
-import {Input, NumberInput, NumberInputField, NumberInputStepper,
-  NumberIncrementStepper, NumberDecrementStepper, RadioGroup, 
-  HStack, Radio, ButtonGroup, Button, Heading, FormControl, 
-  FormLabel, FormErrorMessage, FormHelperText} from '@chakra-ui/react';
-/*  */
+import {Input, Button, Heading, FormControl, 
+  FormLabel} from '@chakra-ui/react';
 
 function LoginPage() {
   const [email, setEmail] = useState("");

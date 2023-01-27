@@ -3,12 +3,10 @@ import {useNavigate} from 'react-router-dom';
 import axios  from 'axios';
 import {FormControl, FormLabel, Input, NumberInput, NumberInputField, NumberInputStepper,
      NumberIncrementStepper, NumberDecrementStepper, FormHelperText,
-     RadioGroup, HStack, Radio, Button as ChakraButton, Flex, Avatar,
-     Box, Text, Badge
+     Button as ChakraButton, Flex, Avatar, Box, Text, Badge
     } from '@chakra-ui/react'
 import {classImgAssigner, randomNumber} from '../utilities/utility';
 import './styles/Global.css'
-
 
 function GenerateCharacter() {
 
@@ -79,7 +77,6 @@ function GenerateCharacter() {
             const ancestryName = response.data.results[RNG].name;
 
             //Setting Count for Possibilities
-
             const ancestryCount = response.data.count-1
 
             const ancestryDescription = response.data.results[RNG].system.description.value;
@@ -92,7 +89,6 @@ function GenerateCharacter() {
 
             //Setting Attributes
             //BOOSTS
-
             const ancestryBoostOne = response.data.results[RNG].system.boosts[0].value[0]
             switch (ancestryBoostOne) {
                 case 'str':
@@ -173,7 +169,6 @@ function GenerateCharacter() {
     }
 
     //!RANDOM BACKGROUND
-
     async function randomizeBackground(){
 
         try {
@@ -253,7 +248,6 @@ function GenerateCharacter() {
     }
 
     //!RANDOM CLASS
-
     async function randomizeClass(){
 
         try {
@@ -296,18 +290,14 @@ function GenerateCharacter() {
             const classCount = response.data.count-1
 
             //Taking Description with HTML
-
             const classDescription = response.data.results[RNG].system.description.value;
 
-            //*Returning Object
-
+            //Returning Object
             const classObject = {
                 name: className,
                 count: classCount,
                 description: classDescription,
             };
-
-            //console.log(classDescription);
 
             return classObject;
             
@@ -319,7 +309,6 @@ function GenerateCharacter() {
     };
 
     //!RANDOM DEITY
-
     async function randomizeDeity(){
 
         try {
@@ -333,14 +322,13 @@ function GenerateCharacter() {
     
             const deityName = response.data.results[RNG].name;
 
-            //*Setting Count for Possibilities Calc
+            //Setting Count for Possibilities Calc
             const deityCount = response.data.count
 
             //Taking Description with HTML
             const deityDescription = response.data.results[RNG].system.description.value
 
-            //*RETURNING OBJECT
-
+            //RETURNING OBJECT
             const deityObject = {
                 name: deityName,
                 count: deityCount,
@@ -356,7 +344,6 @@ function GenerateCharacter() {
     };
 
     //!RANDOM 4BOOST
-
     function randoomBoost (){
 
         //This function takes all Default Values,
@@ -533,9 +520,9 @@ function GenerateCharacter() {
                 Randomize ALL - 🎲{rollCounter}
                 </ChakraButton>
 
-                <Text align='start' fontSize='sm'><span className='text-bold'># Results (All):</span> {typeof allEntries === 'string' ? allEntries : `${Math.floor(allEntries/1000000).toString()} Millions`}</Text>
+                <Text align='start' fontSize='sm'><span className='text-bold'> # Combinations (All):</span> {typeof allEntries === 'string' ? allEntries : `${Math.floor(allEntries/1000000).toString()} Millions`}</Text>
 
-                {typeof allEntries !== 'string' && <Text align='start' fontSize='sm'><span className='text-bold'># Results (w/o Deity):</span> {Math.floor((allEntries/deityEntries)/1000).toString()} Thousands </Text> }
+                {typeof allEntries !== 'string' && <Text align='start' fontSize='sm'><span className='text-bold'> # Combinations (w/o Deity):</span> {Math.floor((allEntries/deityEntries)/1000).toString()} Thousands </Text> }
 
 
                <br />

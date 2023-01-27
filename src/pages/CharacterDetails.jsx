@@ -10,7 +10,7 @@ import {Link} from 'react-router-dom';
 function CharacterDetails() {
 
     const [character, setCharacter] = useState(null)
-    const [loading, setLoading] = useState(true) //!Flag
+    const [loading, setLoading] = useState(true) //Flag
 
     const {id} = useParams();
 
@@ -27,12 +27,10 @@ function CharacterDetails() {
             console.log(err);
         }
     };
-
     
     useEffect(() =>{
         getChar();
     }, []);
-
 
   return (
     <div>

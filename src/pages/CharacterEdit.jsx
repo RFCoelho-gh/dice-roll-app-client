@@ -127,14 +127,13 @@ function CharacterEdit() {
                     </IconButton>
                 </Link>
                 </div>
-
-
             </form>
             <br />
             <hr />
             <br />
             <IconButton onClick={obliterateCharacter} className='paddingLeft' align='start' colorScheme='red' aria-label='see character details' size='lg' icon={<DeleteIcon />} isRound='true' variant='solid'>
             </IconButton>
+            
     </div>
   )
 }

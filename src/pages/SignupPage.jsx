@@ -2,8 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import authService from "../services/auth.service";
 import {Heading, FormControl, FormLabel, Input, Button} from '@chakra-ui/react';
-import {classicFour, randomNumber} from '../utilities/utility';
-//import { FormControl } from "react-bootstrap";
+import {classicFour} from '../utilities/utility';
 
 function SignupPage() {
 
