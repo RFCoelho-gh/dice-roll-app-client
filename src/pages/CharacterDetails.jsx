@@ -27,12 +27,10 @@ function CharacterDetails() {
             console.log(err);
         }
     };
-
     
     useEffect(() =>{
         getChar();
     }, []);
-
 
   return (
     <div>

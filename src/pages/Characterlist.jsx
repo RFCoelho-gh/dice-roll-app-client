@@ -8,7 +8,7 @@ import {classImgAssigner} from '../utilities/utility';
 function Characterlist() {
 
     const [characters, setCharacters] = useState([]);
-    const [loading, setLoading] = useState(true)
+    const [loading, setLoading] = useState(true);
 
     const getCharacters = async () => {
         try {
@@ -73,37 +73,6 @@ function Characterlist() {
             })}
             </>
         )}
-
-        {/* <Heading>List of Characters</Heading>
-
-
-        {characters.map((character) => {
-            return (
-                <>
-                <hr />
-                <Flex className='paddingTopBot'>
-                    <Avatar src={classImgAssigner(character.charClass)}/>
-                    <Box ml='3'>
-                        <Flex>
-                            <Text align='start' fontWeight='bold'>
-                                {character.firstName} <Badge ml="1" colorScheme="yellow">{character.charClass}</Badge>
-                            </Text>
-                            <Link to={`/characterlist/${character._id}`}>
-                                <IconButton align='start' colorScheme='gray' aria-label='see character details' size='xs' icon={<SearchIcon />} isRound='true' variant='outline'>
-                                </IconButton>
-                            </Link>
-                        </Flex>
-                        <Text as="i" align='start'>
-                            {character.ancestry}, {character.background}
-                        </Text>
-                    </Box>
-                </Flex>
-                <hr />
-                </>
-                
-              );
-            })} */}
-
 
     </div>
   )
