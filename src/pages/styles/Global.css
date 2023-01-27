@@ -10,10 +10,6 @@
     padding-left: 5px;
 }
 
-.homeIcon {
-    padding-left: 13px;
-}
-
 .paddingDown {
     padding-bottom: 5px;
 }
@@ -43,4 +39,8 @@
 
 .text-normal {
     font-style: normal;
+}
+
+.homeIconContainer {
+    padding-left: 13px;
 }

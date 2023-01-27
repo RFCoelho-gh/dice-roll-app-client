@@ -57,12 +57,12 @@ import {
           </Flex>
           <Flex flex={{ base: 1 }} justify={{ base: "center", md: "start" }}>
             <Text
-              className="homeIcon"
+              className="homeIconContainer"
               textAlign={useBreakpointValue({ base: "center", md: "left" })}
               fontFamily={"heading"}
               color={useColorModeValue("gray.800", "white")}
             >
-              <Link href="/"><Image boxSize='50px' src='https://cdn.icon-icons.com/icons2/2248/PNG/512/home_circle_icon_137496.png' alt='rolldice_logo2' /></Link>
+              <Link href="/"><Image boxSize='40px' src='https://www.seekpng.com/png/full/237-2373281_general-home-repairs-home-purple-icon-png.png' alt='rolldice_logo2' /></Link>
             </Text>
   
             <Flex display={{ base: "none", md: "flex" }} ml={10}>
